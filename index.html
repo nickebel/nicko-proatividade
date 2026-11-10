@@ -94,6 +94,12 @@ main{min-width:0}.view{display:none;animation:page-arrive .35s var(--ease) both}
   .audio-file-row{align-items:flex-start;flex-direction:column;gap:6px}
 }
 
+
+.audio-url-form{display:flex;gap:7px;min-width:0}
+.audio-url-field{flex:1 1 auto}
+.audio-load-button{cursor:pointer}
+.audio-load-button:disabled{opacity:.5;cursor:wait}
+@media(max-width:520px){.audio-url-form{flex-direction:column}.audio-load-button{align-self:flex-start}}
 </style>
 </head>
 <body>
@@ -174,10 +180,10 @@ main{min-width:0}.view{display:none;animation:page-arrive .35s var(--ease) both}
   </div>
 
   <div class="audio-source-area">
-    <form class="audio-url-form" id="audioUrlForm">
-      <input class="audio-url-field" id="audioUrl" type="url" inputmode="url" placeholder="Cole um link direto para .mp3 ou áudio" aria-label="Link direto de áudio" required>
-      <button class="audio-load-button" type="submit">carregar link ↗</button>
-    </form>
+    <div class="audio-url-form" id="audioUrlControls">
+      <input class="audio-url-field" id="audioUrl" type="url" inputmode="url" placeholder="Cole um link direto para .mp3 ou áudio" aria-label="Link direto de áudio">
+      <button class="audio-load-button" id="loadAudioUrl" type="button">carregar link ↗</button>
+    </div>
     <div class="audio-file-row">
       <input id="audioFileInput" type="file" accept="audio/*,.mp3,.m4a,.ogg,.wav,.flac" multiple hidden>
       <button class="audio-file-button" id="chooseAudioFiles" type="button">＋ adicionar arquivos</button>
@@ -364,15 +370,33 @@ main{min-width:0}.view{display:none;animation:page-arrive .35s var(--ease) both}
     event.target.value='';
   });
   document.getElementById('chooseAudioFiles').addEventListener('click',()=>document.getElementById('audioFileInput').click());
-  document.getElementById('audioUrlForm').addEventListener('submit',event=>{
-    event.preventDefault();
-    const raw=document.getElementById('audioUrl').value.trim();
+  const audioUrlInput=document.getElementById('audioUrl');
+  const loadAudioUrlButton=document.getElementById('loadAudioUrl');
+  function loadAudioFromInput(event){
+    if(event)event.preventDefault();
+    const raw=audioUrlInput.value.trim();
+    if(!raw){audioStatus.textContent='COLE UM LINK DIRETO DE ÁUDIO PARA CONTINUAR';audioUrlInput.focus();return false;}
     let url;
-    try{url=new URL(raw);}catch{audioStatus.textContent='LINK INVÁLIDO · COLE O ENDEREÇO DIRETO DO ÁUDIO';return;}
-    if(!['http:','https:'].includes(url.protocol)){audioStatus.textContent='USE UM LINK HTTP OU HTTPS DE ÁUDIO';return;}
+    try{url=new URL(raw);}catch{audioStatus.textContent='LINK INVÁLIDO · COLE O ENDEREÇO DIRETO DO ÁUDIO';audioUrlInput.focus();return false;}
+    if(!['http:','https:'].includes(url.protocol)){audioStatus.textContent='USE UM LINK HTTP OU HTTPS DE ÁUDIO';audioUrlInput.focus();return false;}
+    let title='Faixa online';
+    try{title=decodeURIComponent(url.pathname.split('/').pop()||'Faixa online');}catch{}
     try{localStorage.setItem(AUDIO_URL_KEY,url.href);}catch{}
-    loadAudioQueue([{src:url.href,title:decodeURIComponent(url.pathname.split('/').pop()||'Faixa online'),meta:'LINK DIRETO · ÁUDIO ONLINE',objectUrl:false}],'LINK DIRETO / PRONTO PARA TOCAR');
-    toast('Link carregado. Aperte play para ouvir.');
+    loadAudioQueue([{src:url.href,title,meta:'LINK DIRETO · ÁUDIO ONLINE',objectUrl:false}],'LINK DIRETO / CARREGANDO');
+    audioElement.play().catch(()=>{
+      audioStatus.textContent='FAIXA CARREGADA · APERTE PLAY PARA REPRODUZIR';
+    });
+    return true;
+  }
+  loadAudioUrlButton.addEventListener('click',function(event){
+    event.preventDefault();
+    loadAudioFromInput(event);
+  });
+  audioUrlInput.addEventListener('keydown',function(event){
+    if(event.key==='Enter'){
+      event.preventDefault();
+      loadAudioFromInput(event);
+    }
   });
   playButton.addEventListener('click',()=>{
     if(!audioQueue.length){audioStatus.textContent='CARREGUE UMA FAIXA PARA COMEÇAR';return;}
@@ -399,8 +423,9 @@ main{min-width:0}.view{display:none;animation:page-arrive .35s var(--ease) both}
   audioElement.addEventListener('pause',()=>{playButton.textContent='▶';playButton.setAttribute('aria-label','Reproduzir');vinylRecord.classList.remove('is-playing');});
   audioElement.addEventListener('ended',()=>{if(audioQueue.length>1)selectAudioTrack(audioIndex+1,true);else{playButton.textContent='▶';audioStatus.textContent='FAIXA CONCLUÍDA';}});
   audioElement.addEventListener('error',()=>{if(audioQueue.length)audioStatus.textContent='NÃO FOI POSSÍVEL ABRIR O ÁUDIO · TENTE UM MP3 OU LINK DIRETO';});
-  const savedAudioUrl=localStorage.getItem(AUDIO_URL_KEY);
-  if(savedAudioUrl){document.getElementById('audioUrl').value=savedAudioUrl;loadAudioQueue([{src:savedAudioUrl,title:'Faixa online salva',meta:'LINK DIRETO · SALVO NESTE DISPOSITIVO',objectUrl:false}],'LINK SALVO / PRONTO PARA TOCAR');}
+  let savedAudioUrl='';
+  try{savedAudioUrl=localStorage.getItem(AUDIO_URL_KEY)||'';}catch{}
+  if(savedAudioUrl){audioUrlInput.value=savedAudioUrl;loadAudioQueue([{src:savedAudioUrl,title:'Faixa online salva',meta:'LINK DIRETO · SALVO NESTE DISPOSITIVO',objectUrl:false}],'LINK SALVO / PRONTO PARA TOCAR');}
 
   
 
@@ -489,54 +514,6 @@ main{min-width:0}.view{display:none;animation:page-arrive .35s var(--ease) both}
     focusInterval=setInterval(()=>{remaining--;if(remaining<=0){clearInterval(focusInterval);focusInterval=null;box.innerHTML=`<div class=\"tag\">Você começou — isso importa!</div><h4>Seus cinco minutos terminaram.</h4><p>Quer continuar mais um pouco ou encerrar por aqui? As duas opções estão bem.</p><button id=\"restoreSuggestion\">Voltar à sugestão</button>`;toast('Cinco minutos concluídos. Parabéns pelo começo!');return}const clock=document.getElementById('focusClock');if(clock)clock.textContent=`${String(Math.floor(remaining/60)).padStart(2,'0')}:${String(remaining%60).padStart(2,'0')}`;},1000);
     box.addEventListener('click',function handler(e){if(e.target.id==='cancelFocus'||e.target.id==='restoreSuggestion'){if(focusInterval)clearInterval(focusInterval);focusInterval=null;box.removeEventListener('click',handler);renderToday();}});
   }
-
-  // Tocador local: o arquivo escolhido permanece no dispositivo do usuário.
-  const playerAudio=document.getElementById('mixtapeAudio');
-  const playerFile=document.getElementById('mixtapeFile');
-  const playerButton=document.getElementById('mixtapePlay');
-  const playerProgress=document.getElementById('mixtapeProgress');
-  const playerCurrent=document.getElementById('mixtapeCurrent');
-  const playerDuration=document.getElementById('mixtapeDuration');
-  const playerTrack=document.getElementById('mixtapeTrack');
-  const playerArtist=document.getElementById('mixtapeArtist');
-  let playerObjectUrl='';
-  const playerTime=value=>{if(!Number.isFinite(value)||value<0)return '0:00';const min=Math.floor(value/60);const sec=Math.floor(value%60).toString().padStart(2,'0');return min+':'+sec;};
-  const updatePlayer=()=>{
-    const duration=Number.isFinite(playerAudio.duration)?playerAudio.duration:0;
-    playerCurrent.textContent=playerTime(playerAudio.currentTime);
-    playerDuration.textContent=playerTime(duration);
-    playerProgress.value=duration?String((playerAudio.currentTime/duration)*100):'0';
-  };
-  playerFile.addEventListener('change',()=>{
-    const file=playerFile.files&&playerFile.files[0];
-    if(!file)return;
-    if(playerObjectUrl)URL.revokeObjectURL(playerObjectUrl);
-    playerObjectUrl=URL.createObjectURL(file);
-    playerAudio.src=playerObjectUrl;
-    playerAudio.load();
-    playerTrack.textContent=file.name.replace(/\.[^.]+$/,'');
-    playerArtist.textContent='Arquivo local · somente neste dispositivo';
-    playerButton.textContent='▶';
-    playerButton.setAttribute('aria-label','Reproduzir faixa');
-    playerProgress.value='0';
-    playerCurrent.textContent='0:00';
-    playerDuration.textContent='0:00';
-    toast('Faixa pronta. Aperte play para ouvir.');
-  });
-  playerButton.addEventListener('click',()=>{
-    if(!playerAudio.src){playerFile.click();return;}
-    if(playerAudio.paused){playerAudio.play().catch(()=>toast('Não foi possível reproduzir este arquivo de áudio.'));}
-    else playerAudio.pause();
-  });
-  playerAudio.addEventListener('play',()=>{playerButton.textContent='Ⅱ';playerButton.setAttribute('aria-label','Pausar faixa');});
-  playerAudio.addEventListener('pause',()=>{playerButton.textContent='▶';playerButton.setAttribute('aria-label','Reproduzir faixa');});
-  playerAudio.addEventListener('timeupdate',updatePlayer);
-  playerAudio.addEventListener('loadedmetadata',updatePlayer);
-  playerAudio.addEventListener('ended',()=>{playerProgress.value='0';playerAudio.currentTime=0;updatePlayer();});
-  playerProgress.addEventListener('input',()=>{
-    if(Number.isFinite(playerAudio.duration)&&playerAudio.duration>0)playerAudio.currentTime=(Number(playerProgress.value)/100)*playerAudio.duration;
-  });
-  window.addEventListener('beforeunload',()=>{if(playerObjectUrl)URL.revokeObjectURL(playerObjectUrl);});
 
   render();
   if('serviceWorker' in navigator && location.protocol!=='file:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
