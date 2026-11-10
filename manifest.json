@@ -1,17 +1,10 @@
 {
-  "name": "Nicko — Um espaço de calma",
+  "name": "Nicko — Dark Academia Workspace",
   "short_name": "Nicko",
-  "description": "Um dashboard pessoal em tons terrosos para organizar rotinas, cultivar hábitos e encontrar inspiração.",
+  "description": "Um espaço acolhedor e escuro para organizar o cotidiano, cultivar hábitos e acompanhar seus projetos.",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#1a1512",
   "theme_color": "#1a1512",
-  "icons": [
-    {
-      "src": "icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
-  ]
+  "icons": [{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
 }
