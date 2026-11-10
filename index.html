@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#151d20">
+  <meta name="description" content="Um espaço pessoal para cultivar iniciativa, organizar o cotidiano e avançar no próprio ritmo.">
+  <title>Nicko — Meu espaço</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+:root{
+  color-scheme:dark;
+  --bg:#151d20;
+  --bg-deep:#111719;
+  --surface:#1d272b;
+  --surface-2:#222e32;
+  --surface-3:#2a383b;
+  --ink:#eef1ed;
+  --ink-soft:#c2ccc6;
+  --muted:#87948e;
+  --muted-2:#687772;
+  --line:rgba(204,218,210,.15);
+  --line-strong:rgba(204,218,210,.25);
+  --moss:#879681;
+  --moss-light:#b5c0ab;
+  --moss-dark:#34443b;
+  --danger:#bd918c;
+  --gold:#b8a98a;
+  --blue:#8ca2a5;
+  --blue-dark:#a8b7b5;
+  --shadow:0 24px 70px rgba(0,0,0,.22);
+  --font:'Inter','DM Sans',Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:14px;font-weight:400;line-height:1.55;letter-spacing:.005em}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:1px solid var(--moss-light);outline-offset:3px}
+a{color:inherit;text-decoration:none}
+::selection{background:#73836e;color:#fff}
+.site-shell{width:min(100% - 88px,1400px);margin:0 auto;padding:27px 0 44px}
+.masthead{display:flex;align-items:center;gap:24px;min-height:45px;margin-bottom:22px}
+.brandline{display:flex;align-items:baseline;gap:15px;white-space:nowrap}
+.brand-word{font-size:20px;font-weight:400;letter-spacing:.28em;color:#e7ece7}
+.brand-sub{font-size:8px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.masthead-rule{height:1px;flex:1;background:linear-gradient(90deg,var(--line-strong),rgba(204,218,210,.08))}
+.masthead-meta{display:flex;align-items:center;gap:20px;min-width:0}
+.date-label{font-size:10px;font-weight:400;letter-spacing:.09em;text-transform:uppercase;color:#a6b1ab;white-space:nowrap}
+.top-actions{display:flex;align-items:center;gap:8px}
+.quiet-action{border:1px solid var(--line-strong);background:transparent;color:#d9e0da;padding:8px 12px;font-size:9px;letter-spacing:.13em;text-transform:uppercase;transition:background .25s,border-color .25s,color .25s}
+.quiet-action:hover{background:rgba(135,150,129,.14);border-color:rgba(181,192,171,.55);color:#fff}
+.avatar{width:29px;height:29px;display:grid;place-items:center;border:1px solid var(--line-strong);color:#d9e0da;font-size:10px;letter-spacing:.08em}
+.nav-frame{position:sticky;top:0;z-index:20;margin:0 0 19px;background:rgba(20,27,30,.79);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid rgba(204,218,210,.12);border-bottom:1px solid rgba(204,218,210,.12)}
+.nav{display:flex;align-items:stretch;min-height:44px;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav button{position:relative;display:flex;align-items:center;gap:11px;flex:1 0 auto;justify-content:center;min-width:110px;padding:0 17px;border:0;border-right:1px solid rgba(204,218,210,.08);background:transparent;color:#91a09a;font-size:9px;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap;transition:color .25s,background .25s}
+.nav button:first-child{border-left:1px solid rgba(204,218,210,.08)}
+.nav button:hover{background:rgba(227,235,228,.045);color:#edf1eb}
+.nav button.active{background:rgba(188,202,190,.16);color:#f0f2ed}
+.nav button.active:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:#8d9a84}
+.nav-index{color:#74837c;font-size:8px;letter-spacing:.08em}
+.nav button.active .nav-index{color:#c0caba}
+main{min-width:0}
+.view{display:none;animation:appear .45s ease both}
+.view.active{display:block}
+@keyframes appear{from{opacity:.35;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.hero-scene{position:relative;isolation:isolate;min-height:500px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:23px 30px 27px;background-color:#172124;background-image:linear-gradient(180deg,rgba(13,20,22,.62) 0%,rgba(13,20,22,.28) 38%,rgba(13,20,22,.78) 100%),url('https://images.unsplash.com/photo-1773016491521-fd1c72fcab35?auto=format&fit=crop&w=2400&q=85');background-size:cover;background-position:center 48%;background-blend-mode:multiply,normal;box-shadow:var(--shadow)}
+.hero-scene:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(14,22,24,.42),transparent 50%,rgba(14,22,24,.25));}
+.hero-scene:after{content:"";position:absolute;inset:13px;z-index:-1;border:1px solid rgba(231,239,231,.13);pointer-events:none}
+.hero-topline,.hero-baseline{display:flex;align-items:center;justify-content:space-between;gap:22px}
+.hero-topline span,.hero-note-label{font-size:8px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(231,238,230,.73)}
+.hero-center{position:absolute;left:20px;right:20px;top:48%;transform:translateY(-50%);text-align:center;padding:0 14px}
+.hero-center .eyebrow{margin:0 0 18px;color:rgba(230,237,228,.75);font-size:8px;font-weight:500;letter-spacing:.32em;text-transform:uppercase}
+.hero-center h1{margin:0 auto;color:#f0f2ef;font-size:clamp(48px,9.3vw,126px);font-weight:300;line-height:.98;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase;text-shadow:0 5px 34px rgba(0,0,0,.3);white-space:nowrap}
+.hero-center p{max-width:570px;margin:22px auto 0;color:rgba(235,240,234,.78);font-size:10px;font-weight:300;letter-spacing:.16em;line-height:1.8;text-transform:uppercase}
+.hero-baseline{align-items:flex-end;position:relative;z-index:1}
+.hero-baseline-copy{max-width:390px}
+.hero-baseline-copy strong{display:block;margin-bottom:5px;color:#edf1eb;font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase}
+.hero-baseline-copy p{margin:0;color:rgba(225,234,226,.72);font-size:10px;line-height:1.75}
+.hero-progress{width:min(240px,35%);padding-left:18px;border-left:1px solid rgba(228,236,227,.28)}
+.hero-progress-main{display:flex;align-items:baseline;gap:8px}
+.hero-progress strong{font-size:36px;font-weight:300;line-height:1;letter-spacing:-.06em;color:#f1f3ee}
+.hero-progress span{font-size:8px;color:rgba(230,237,228,.72);letter-spacing:.18em;text-transform:uppercase}
+.day-progress{height:2px;margin:11px 0 7px;background:rgba(235,241,233,.22);overflow:hidden}
+.day-progress span{display:block;width:0;height:100%;background:#c1cdb7;transition:width .35s ease}
+.hero-progress small{display:block;color:rgba(229,236,228,.68);font-size:8px;letter-spacing:.07em}
+.impact-grid{display:grid;grid-template-columns:1.08fr 1.2fr .95fr;margin-top:1px;background:#293538;border-top:1px solid rgba(205,218,209,.1);border-bottom:1px solid rgba(205,218,209,.1);gap:1px}
+.impact-card{position:relative;min-height:145px;display:flex;flex-direction:column;justify-content:space-between;padding:19px 22px;background:#1c272b;overflow:hidden;transition:background .3s}
+.impact-card:hover{background:#253237}
+.impact-card:nth-child(2){background:#233034}
+.impact-card:nth-child(3){background:#2c393b}
+.impact-label{color:#8f9d96;font-size:8px;font-weight:500;letter-spacing:.18em;text-transform:uppercase}
+.impact-number{display:block;color:#edf0ea;font-family:var(--font);font-size:clamp(38px,5.2vw,64px);font-weight:300;line-height:.95;letter-spacing:-.07em;font-variant-numeric:tabular-nums}
+.impact-caption{max-width:215px;color:#a0ada6;font-size:9px;line-height:1.5}
+.impact-card:after{content:"";position:absolute;width:170px;height:170px;right:-75px;bottom:-105px;border:1px solid rgba(201,215,203,.08);border-radius:50%;box-shadow:0 0 0 14px rgba(201,215,203,.025),0 0 0 29px rgba(201,215,203,.02),0 0 0 44px rgba(201,215,203,.018);pointer-events:none}
+.feature-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:1px;margin-top:34px;background:#303e40;border:1px solid rgba(204,218,210,.1)}
+.panel{position:relative;min-width:0;padding:25px 26px;background:#1d282c;border:0;border-radius:0;box-shadow:none;overflow:hidden}
+.panel-head{position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:18px}
+.panel-head h3{margin:0;color:#e7ece6;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase}
+.panel-head p{margin:5px 0 0;color:#899790;font-size:9px;line-height:1.6}
+.panel-number{color:#899a8b;font-size:9px;letter-spacing:.2em;white-space:nowrap}
+.next-panel{min-height:255px;background:#1c262a}
+.next-panel:after{content:"";position:absolute;right:-74px;bottom:-126px;width:330px;height:330px;opacity:.48;background:repeating-radial-gradient(circle at center,transparent 0 13px,rgba(174,190,174,.10) 14px 15px,transparent 16px 28px);mask-image:linear-gradient(135deg,transparent 8%,#000 54%,#000 100%);pointer-events:none}
+.next-panel .suggestion{position:relative;z-index:1;max-width:500px;min-height:150px;padding:14px 0 0;background:transparent;border:0;border-radius:0}
+.suggestion .tag{display:block;color:#9cad9c;font-size:8px;font-weight:500;letter-spacing:.19em;text-transform:uppercase}
+.suggestion h4{margin:13px 0 9px;color:#f1f2ed;font-size:clamp(19px,2.2vw,27px);font-weight:300;line-height:1.18;letter-spacing:-.035em}
+.suggestion p{max-width:400px;margin:0 0 20px;color:#aab5ad;font-size:10px;line-height:1.8}
+.suggestion p b{color:#e3e9df;font-weight:500}
+.suggestion button{position:relative;z-index:2;min-height:37px;padding:0 15px;border:1px solid rgba(180,198,176,.38);border-radius:0;background:rgba(83,103,83,.16);color:#dce5d8;font-size:8px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;transition:background .25s,border-color .25s,color .25s}
+.suggestion button:hover{background:rgba(127,148,119,.23);border-color:#899b84;color:#fff}
+.image-panel{position:relative;min-height:255px;display:flex;flex-direction:column;justify-content:space-between;padding:22px 24px;background-color:#172124;background-image:linear-gradient(180deg,rgba(10,17,18,.28),rgba(10,17,18,.8)),url('https://images.unsplash.com/photo-1764111812995-b73ff58fc7d7?auto=format&fit=crop&w=1400&q=85');background-size:cover;background-position:center 47%;overflow:hidden}
+.image-panel:after{content:"";position:absolute;inset:13px;border:1px solid rgba(232,239,229,.15);pointer-events:none}
+.image-panel>*{position:relative;z-index:1}
+.image-panel .panel-kicker{color:rgba(236,241,234,.75);font-size:8px;letter-spacing:.2em;text-transform:uppercase}
+.image-panel h2{max-width:360px;margin:0;color:#f0f2eb;font-size:clamp(22px,2.8vw,34px);font-weight:300;line-height:1.12;letter-spacing:-.035em}
+.image-panel p{max-width:330px;margin:10px 0 0;color:rgba(231,238,230,.74);font-size:9px;line-height:1.7}
+.grid-two{display:grid;grid-template-columns:1.15fr .85fr;gap:1px;margin-top:34px;background:#303e40;border:1px solid rgba(204,218,210,.1)}
+.tasks-panel,.habits-panel{min-height:255px}
+.habits-panel{background:#273436}
+.habits-panel:after{content:"";position:absolute;right:-68px;top:14px;width:280px;height:280px;opacity:.38;background:repeating-conic-gradient(from 15deg at center,rgba(194,207,192,.11) 0 1deg,transparent 1deg 12deg);mask-image:radial-gradient(circle,transparent 0 31%,#000 32% 33%,transparent 34% 39%,#000 40% 41%,transparent 42% 46%,#000 47% 48%,transparent 49%);pointer-events:none}
+.tasks-panel .panel-head,.habits-panel .panel-head{margin-bottom:12px}
+.task-list,.habit-list{position:relative;z-index:1;display:grid;gap:0}
+.task-row{display:flex;align-items:center;gap:12px;min-width:0;padding:13px 2px;border-bottom:1px solid rgba(202,216,207,.11);background:transparent;border-radius:0;transition:background .2s,border-color .2s}
+.task-row:hover{background:rgba(205,220,207,.035);border-color:rgba(165,185,160,.27)}
+.task-row:last-child{border-bottom:0}
+.check{flex:0 0 18px;width:18px;height:18px;display:grid;place-items:center;border:1px solid rgba(204,218,210,.38);border-radius:0;background:transparent;color:#eff2ed;font-size:10px;transition:background .2s,border-color .2s}
+.check:hover{border-color:#a6b69f;background:rgba(135,150,129,.15)}
+.check.done{border-color:#899a84;background:#63755f;color:#f4f6f0}
+.task-main{flex:1;min-width:0}
+.task-main b{display:block;overflow:hidden;color:#e2e8e1;font-size:10px;font-weight:500;text-overflow:ellipsis;white-space:nowrap}
+.task-main small{display:block;margin-top:3px;color:#87958e;font-size:8px;letter-spacing:.03em}
+.task-row.completed .task-main b{text-decoration:line-through;color:#839087}
+.priority{flex:0 0 auto;padding:3px 6px;border:1px solid rgba(204,218,210,.14);border-radius:0;color:#a8b4a9;font-size:7px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;white-space:nowrap}
+.priority.alta{border-color:rgba(189,145,140,.35);color:#d0a29c;background:rgba(189,145,140,.07)}
+.priority.media{border-color:rgba(184,169,138,.28);color:#c3b695;background:rgba(184,169,138,.06)}
+.priority.baixa{border-color:rgba(135,150,129,.3);color:#b6c2ae;background:rgba(135,150,129,.07)}
+.text-btn{padding:5px 2px;border:0;background:transparent;color:#9aa79e;font-size:8px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
+.text-btn:hover{color:#e6ede3}
+.mini-habit{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 1px;border-bottom:1px solid rgba(202,216,207,.11)}
+.mini-habit:last-child{border-bottom:0}
+.mini-habit b{display:block;color:#e0e7df;font-size:10px;font-weight:450}
+.mini-habit small{display:block;margin-top:3px;color:#89978f;font-size:8px}
+.habit-toggle{min-width:65px;height:29px;padding:0 9px;border:1px solid rgba(204,218,210,.23);border-radius:0;background:transparent;color:#aebbb0;font-size:7px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;transition:background .22s,border-color .22s,color .22s}
+.habit-toggle:hover{border-color:#82967c;background:rgba(135,150,129,.13);color:#edf2e9}
+.habit-toggle.done{border-color:#73866e;background:rgba(115,134,110,.18);color:#c8d5c0}
+.page-heading{margin:36px 0 24px;padding:0 0 18px;border-bottom:1px solid var(--line)}
+.page-heading .eyebrow{margin:0 0 10px;color:#9baa98;font-size:8px;font-weight:500;letter-spacing:.23em;text-transform:uppercase}
+.page-heading h1{margin:0;color:#f0f2ed;font-size:clamp(30px,5vw,58px);font-weight:300;letter-spacing:.08em;line-height:1.06;text-transform:uppercase}
+.page-heading p:not(.eyebrow){max-width:620px;margin:11px 0 0;color:#8d9a93;font-size:10px;line-height:1.8}
+.toolbar{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:0 0 17px}
+.field{min-width:0;padding:11px 13px;border:1px solid rgba(204,218,210,.2);border-radius:0;background:#172124;color:#e6ece5;font-size:10px;transition:border-color .2s,background .2s}
+.field::placeholder{color:#77847e}
+.field:hover{border-color:rgba(177,195,171,.43)}
+.field:focus{border-color:#879b80;outline:0;box-shadow:0 0 0 1px rgba(135,155,128,.16)}
+select.field option{background:#1c272b;color:#e6ece5}
+.toolbar .field{min-width:180px}
+.primary,.secondary{min-height:38px;padding:0 15px;border:1px solid rgba(177,195,171,.38);border-radius:0;background:#34453b;color:#edf1e9;font-size:8px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;box-shadow:none;transition:background .22s,border-color .22s,color .22s,transform .22s}
+.primary:hover,.secondary:hover{border-color:#a3b49a;background:#455844;color:#fff;transform:translateY(-1px)}
+.secondary{border-color:rgba(204,218,210,.22);background:transparent;color:#bac6bd}
+.secondary:hover{background:rgba(135,150,129,.1)}
+.empty{padding:28px 18px;border:1px dashed rgba(204,218,210,.19);border-radius:0;background:rgba(15,22,24,.2);color:#8f9b94;text-align:left}
+.empty .empty-ico{margin-bottom:9px;color:#9eae9b;font-size:20px;opacity:.85}
+.empty b{display:block;color:#d7e0d7;font-size:10px;font-weight:450}
+.empty p{margin:5px 0 0;color:#87948d;font-size:9px;line-height:1.7}
+.habit-card-grid,.project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:#303e40;border:1px solid rgba(204,218,210,.11)}
+.habit-card,.project-card{min-width:0;padding:21px;background:#1d282c;border:0;border-radius:0;transition:background .28s,box-shadow .28s}
+.habit-card:hover,.project-card:hover{background:#273538;box-shadow:inset 0 0 0 1px rgba(153,174,145,.38)}
+.habit-card-top,.project-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.habit-emoji{width:34px;height:34px;display:grid;place-items:center;border:1px solid rgba(204,218,210,.14);border-radius:0;background:#293639;color:#d1dacf;font-size:14px}
+.habit-card h3,.project-card h3{margin:15px 0 6px;color:#edf0e9;font-size:14px;font-weight:400;letter-spacing:.02em}
+.habit-card p,.project-card p{margin:0;color:#929f98;font-size:9px;line-height:1.75}
+.habit-card-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:17px;padding-top:12px;border-top:1px solid var(--line)}
+.habit-card-foot small{color:#9aa69d;font-size:8px}
+.habit-card-foot button{padding:9px 11px;border:1px solid rgba(177,195,171,.32);border-radius:0;background:rgba(83,103,83,.16);color:#d0dbca;font-size:7px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;transition:background .22s,border-color .22s}
+.habit-card-foot button:hover{background:rgba(127,148,119,.23);border-color:#899b84}
+.habit-card-foot button.done{background:rgba(115,134,110,.2);border-color:#748a70;color:#d3dfcd}
+.progress-track{height:3px;margin:16px 0 9px;background:#354246}
+.progress-track span{display:block;height:100%;background:#91a08b;transition:width .3s ease}
+.project-meta{display:flex;justify-content:space-between;gap:10px;color:#8e9b95;font-size:8px}
+.next-step{margin-top:13px;padding:12px 13px;border-left:1px solid #879981;background:#243135;color:#aebbb2;font-size:9px;line-height:1.7}
+.next-step b{display:block;margin-bottom:4px;color:#c9d3c5;font-size:7px;font-weight:500;letter-spacing:.15em;text-transform:uppercase}
+.inbox-form{display:flex;gap:8px;margin-bottom:14px}
+.inbox-form .field{flex:1}
+.inbox-item{display:flex;align-items:center;gap:12px;padding:14px 2px;border-bottom:1px solid var(--line)}
+.inbox-item span{flex:1;min-width:0;color:#d4ddd5;font-size:10px}
+.inbox-item button{padding:5px;border:0;background:transparent;color:#aebba9;font-size:7px;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
+.inbox-item button:hover{color:#fff}
+.review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.review-field label{display:block;margin-bottom:8px;color:#cbd5cd;font-size:9px;font-weight:500;letter-spacing:.06em}
+.review-field textarea{width:100%;min-height:112px;resize:vertical;line-height:1.7}
+.review-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px}
+.review-history{display:grid;gap:1px}
+.review-entry{padding:14px 0;border-bottom:1px solid var(--line)}
+.review-entry b{color:#dfe6df;font-size:9px;font-weight:500;letter-spacing:.1em}
+.review-entry p{color:#a4b0aa;font-size:9px;line-height:1.7}
+.footer-note{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:34px;padding:16px 0 0;border-top:1px solid var(--line);color:#778681;font-size:8px;letter-spacing:.14em;text-transform:uppercase}
+.footer-actions{display:flex;gap:8px}
+.footer-actions button{border:0;background:transparent;color:#8e9b93;font-size:8px;letter-spacing:.13em;text-transform:uppercase;transition:color .2s}
+.footer-actions button:hover{color:#e7ede4}
+.modal-backdrop{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(5,10,11,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.modal-backdrop.open{display:flex}
+.modal{width:min(520px,100%);max-height:88vh;overflow:auto;padding:24px;border:1px solid rgba(204,218,210,.2);border-radius:0;background:#1d282c;box-shadow:0 24px 80px rgba(0,0,0,.48)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;padding-bottom:13px;border-bottom:1px solid var(--line)}
+.modal-head h2{margin:0;color:#eef1eb;font-size:21px;font-weight:300;letter-spacing:.04em}
+.close{width:32px;height:32px;border:1px solid var(--line);border-radius:0;background:transparent;color:#c5d0c8;font-size:19px;transition:background .2s,border-color .2s}
+.close:hover{background:rgba(135,150,129,.15);border-color:#83977d}
+.form-grid{display:grid;gap:14px}
+.form-field label{display:block;margin-bottom:6px;color:#b9c6bd;font-size:8px;font-weight:500;letter-spacing:.12em;text-transform:uppercase}
+.form-field input,.form-field textarea,.form-field select{width:100%;padding:11px 12px;border:1px solid var(--line-strong);border-radius:0;background:#151e21;color:#e7ece6;font-size:10px}
+.form-field textarea{min-height:80px;resize:vertical}
+.form-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:8px}
+.toast{position:fixed;z-index:60;right:22px;bottom:22px;max-width:min(420px,calc(100% - 44px));padding:12px 16px;border:1px solid rgba(203,219,205,.18);border-radius:0;background:#33443b;color:#f0f2eb;font-size:9px;letter-spacing:.02em;box-shadow:0 12px 32px rgba(0,0,0,.35);opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .25s ease,transform .25s ease}
+.toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:980px){
+  .site-shell{width:min(100% - 48px,1400px)}
+  .nav button{min-width:105px;padding:0 13px}
+  .hero-scene{min-height:460px}
+  .grid-two{grid-template-columns:1fr 1fr}
+}
+@media(max-width:680px){
+  .site-shell{width:calc(100% - 28px);padding:17px 0 30px}
+  .masthead{gap:12px;margin-bottom:15px}
+  .brandline{gap:8px}
+  .brand-word{font-size:16px;letter-spacing:.2em}
+  .brand-sub{display:none}
+  .masthead-meta{gap:9px}
+  .date-label{max-width:125px;overflow:hidden;text-overflow:ellipsis;font-size:7px;letter-spacing:.06em}
+  .quiet-action{padding:7px 8px;font-size:7px;letter-spacing:.08em}
+  .avatar{display:none}
+  .nav-frame{margin-bottom:12px}
+  .nav{min-height:42px;justify-content:flex-start}
+  .nav button{flex:0 0 auto;min-width:98px;gap:7px;padding:0 12px;font-size:8px}
+  .hero-scene{min-height:445px;padding:19px 19px 22px;background-position:center}
+  .hero-scene:after{inset:9px}
+  .hero-topline span{font-size:7px;letter-spacing:.13em}
+  .hero-center{left:5px;right:5px;top:47%}
+  .hero-center .eyebrow{font-size:7px;letter-spacing:.2em;margin-bottom:17px}
+  .hero-center h1{font-size:clamp(38px,11vw,64px);letter-spacing:.19em;text-indent:.19em}
+  .hero-center p{max-width:310px;margin-top:17px;font-size:7px;letter-spacing:.1em}
+  .hero-baseline{align-items:flex-end;gap:13px}
+  .hero-baseline-copy{max-width:180px}
+  .hero-baseline-copy strong{font-size:8px}
+  .hero-baseline-copy p{font-size:8px;line-height:1.6}
+  .hero-progress{width:42%;padding-left:11px}
+  .hero-progress strong{font-size:29px}
+  .hero-progress span{font-size:7px}
+  .hero-progress small{font-size:7px}
+  .impact-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .impact-card{min-height:115px;padding:13px 10px}
+  .impact-label{font-size:6px;letter-spacing:.12em}
+  .impact-number{font-size:clamp(26px,8vw,39px)}
+  .impact-caption{font-size:7px;line-height:1.4}
+  .feature-grid,.grid-two{grid-template-columns:1fr}
+  .feature-grid,.grid-two{margin-top:24px}
+  .panel{padding:19px 17px}
+  .next-panel{min-height:242px}
+  .image-panel{min-height:220px}
+  .tasks-panel,.habits-panel{min-height:unset}
+  .page-heading{margin:25px 0 18px;padding-bottom:14px}
+  .page-heading h1{font-size:clamp(27px,8vw,42px);letter-spacing:.05em}
+  .toolbar{align-items:stretch}
+  .toolbar .field{flex:1;min-width:110px}
+  .toolbar .primary{flex:0 0 auto}
+  .habit-card-grid,.project-grid,.review-grid{grid-template-columns:1fr}
+  .inbox-form{flex-direction:column}
+  .inbox-item{flex-wrap:wrap}
+  .review-actions{align-items:stretch;flex-direction:column}
+  .review-actions button{width:100%}
+  .form-row{grid-template-columns:1fr}
+  .footer-note{align-items:flex-start;flex-direction:column;font-size:7px;line-height:1.7}
+}
+@media(max-width:390px){
+  .site-shell{width:calc(100% - 20px)}
+  .hero-scene{min-height:420px}
+  .hero-center h1{font-size:36px;letter-spacing:.13em;text-indent:.13em}
+  .hero-baseline-copy{max-width:140px}
+  .impact-card{padding:11px 7px}
+  .impact-number{font-size:25px}
+  .impact-caption{font-size:6px}
+  .nav button{min-width:88px;padding:0 9px}
+  .task-row{gap:8px}
+  .priority{display:none}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="site-shell">
+  <header class="masthead">
+    <div class="brandline"><a class="brand-word" href="#top" aria-label="Nicko — início">NICKO</a><span class="brand-sub">um espaço em movimento</span></div>
+    <span class="masthead-rule" aria-hidden="true"></span>
+    <div class="masthead-meta"><div class="date-label" id="todayDate"></div><div class="top-actions"><button class="quiet-action" id="quickCapture" title="Anotar uma ideia" aria-label="Anotar uma ideia">＋ Nota rápida</button><div class="avatar" aria-label="Perfil Nicko">N.</div></div></div>
+  </header>
+
+  <div class="nav-frame">
+    <nav class="nav" aria-label="Navegação principal">
+      <button class="active" data-view="today"><span class="nav-index">01</span><span>Meu dia</span></button>
+      <button data-view="tasks"><span class="nav-index">02</span><span>Tarefas</span></button>
+      <button data-view="habits"><span class="nav-index">03</span><span>Hábitos</span></button>
+      <button data-view="projects"><span class="nav-index">04</span><span>Projetos</span></button>
+      <button data-view="inbox"><span class="nav-index">05</span><span>Ideias</span></button>
+      <button data-view="review"><span class="nav-index">06</span><span>Revisão</span></button>
+    </nav>
+  </div>
+
+  <main id="top">
+    <section class="view active" id="view-today">
+      <section class="hero-scene" aria-label="Boas-vindas">
+        <div class="hero-topline"><span>NOTAS PARA UMA VIDA EM MOVIMENTO</span><span>VOL. 01 / COTIDIANO</span></div>
+        <div class="hero-center"><p class="eyebrow">UM ESPAÇO PARA CULTIVAR INICIATIVA</p><h1 id="greeting">BOM DIA</h1><p>Menos ruído. Mais presença. Um passo de cada vez.</p></div>
+        <div class="hero-baseline">
+          <div class="hero-baseline-copy"><strong>O seu próprio ritmo</strong><p>Não é preciso resolver tudo hoje. Basta escolher o que merece sua atenção agora.</p></div>
+          <div class="hero-progress" id="dayRing"><div class="hero-progress-main"><strong id="dayPercent">0%</strong><span>do dia planejado</span></div><div class="day-progress"><span id="dayProgressBar"></span></div><small id="dayRingText">Seu progresso aparece aqui.</small></div>
+        </div>
+      </section>
+
+      <section class="impact-grid" aria-label="Resumo do dia">
+        <article class="impact-card"><span class="impact-label">Ações concluídas</span><strong class="impact-number" id="tasksDoneStat">0/0</strong><span class="impact-caption">Tarefas que já encontraram seu lugar no dia.</span></article>
+        <article class="impact-card"><span class="impact-label">Hábitos praticados</span><strong class="impact-number" id="habitsDoneStat">0/0</strong><span class="impact-caption">Pequenas escolhas que, com o tempo, criam caminho.</span></article>
+        <article class="impact-card"><span class="impact-label">Em aberto</span><strong class="impact-number" id="openTasksStat">0</strong><span class="impact-caption">Pendências que ainda podem esperar sua vez.</span></article>
+      </section>
+
+      <section class="feature-grid" aria-label="Próxima ação e inspiração">
+        <section class="panel next-panel">
+          <div class="panel-head"><div><h3>Próximo passo</h3><p>Uma única coisa que importa agora.</p></div><span class="panel-number">N° 01</span></div>
+          <div class="suggestion" id="suggestionBox"></div>
+        </section>
+        <aside class="image-panel"><span class="panel-kicker">UM INTERVALO ENTRE AS COISAS</span><div><h2>O silêncio também faz parte do caminho.</h2><p>Nem todo espaço precisa ser preenchido. Deixe a rotina respirar.</p></div></aside>
+      </section>
+
+      <section class="grid-two">
+        <section class="panel tasks-panel"><div class="panel-head"><div><h3>O que merece atenção</h3><p>Pequenas ações, no seu próprio ritmo.</p></div><button class="text-btn" data-go="tasks">Ver todas ↗</button></div><div class="task-list" id="todayTaskList"></div></section>
+        <section class="panel habits-panel"><div class="panel-head"><div><h3>Hábitos de hoje</h3><p>O que você quer cultivar, sem cobrança.</p></div><button class="text-btn" data-go="habits">Acompanhar ↗</button></div><div class="habit-list" id="todayHabitList"></div></section>
+      </section>
+    </section>
+
+    <section class="view" id="view-tasks">
+      <div class="page-heading"><p class="eyebrow">02 / ORGANIZAÇÃO</p><h1>Minhas tarefas</h1><p>Veja suas pendências, escolha prioridades e avance no seu ritmo.</p></div>
+      <div class="toolbar"><input class="field" id="taskSearch" placeholder="Buscar tarefa..." aria-label="Buscar tarefa"><select class="field" id="taskFilter" aria-label="Filtrar tarefas"><option value="all">Todas as tarefas</option><option value="open">Em aberto</option><option value="done">Concluídas</option><option value="today">Para hoje</option><option value="overdue">Atrasadas</option></select><button class="primary" data-modal="task">＋ Nova tarefa</button></div>
+      <div class="panel"><div class="task-list" id="allTaskList"></div></div>
+    </section>
+
+    <section class="view" id="view-habits">
+      <div class="page-heading"><p class="eyebrow">03 / CONTINUIDADE</p><h1>Meus hábitos</h1><p>Acompanhe o que você quer cultivar. O importante é encontrar uma forma possível de continuar.</p></div>
+      <div class="toolbar"><button class="primary" data-modal="habit">＋ Novo hábito</button><span style="color:var(--muted);font-size:9px;letter-spacing:.04em">Marque cada hábito quando praticar hoje.</span></div>
+      <div class="habit-card-grid" id="habitGrid"></div>
+    </section>
+
+    <section class="view" id="view-projects">
+      <div class="page-heading"><p class="eyebrow">04 / DIREÇÃO</p><h1>Meus projetos</h1><p>Deixe cada projeto com um próximo passo bem definido. Objetivos grandes também começam pequenos.</p></div>
+      <div class="toolbar"><button class="primary" data-modal="project">＋ Novo projeto</button></div>
+      <div class="project-grid" id="projectGrid"></div>
+    </section>
+
+    <section class="view" id="view-inbox">
+      <div class="page-heading"><p class="eyebrow">05 / CAPTURA</p><h1>Caixa de ideias</h1><p>Ideias, lembretes e assuntos que não precisam ser resolvidos agora podem ficar aqui.</p></div>
+      <div class="panel"><form class="inbox-form" id="inboxForm"><input class="field" id="inboxInput" placeholder="Uma ideia, lembrete ou coisa para resolver..." required maxlength="180"><button class="primary">Guardar ideia</button></form><div id="inboxList"></div></div>
+    </section>
+
+    <section class="view" id="view-review">
+      <div class="page-heading"><p class="eyebrow">06 / PAUSA E OBSERVAÇÃO</p><h1>Revisão semanal</h1><p>Registre o que funcionou, o que pesou e o que você quer ajustar daqui para frente.</p></div>
+      <form class="panel" id="reviewForm"><div class="review-grid"><div class="review-field"><label for="reviewWin">O que eu consegui fazer nesta semana?</label><textarea class="field" id="reviewWin" placeholder="Até as pequenas conquistas contam..."></textarea></div><div class="review-field"><label for="reviewHard">O que foi difícil ou ficou pendente?</label><textarea class="field" id="reviewHard" placeholder="Sem culpa: apenas observe..."></textarea></div><div class="review-field"><label for="reviewLearn">O que aprendi sobre minha rotina?</label><textarea class="field" id="reviewLearn" placeholder="O que me ajudou? O que me atrapalhou?"></textarea></div><div class="review-field"><label for="reviewNext">Qual será meu foco na próxima semana?</label><textarea class="field" id="reviewNext" placeholder="Escolha uma prioridade possível..."></textarea></div></div><div class="review-actions"><span style="font-size:9px;color:var(--muted)">Sua revisão fica salva neste navegador.</span><button class="primary">Salvar minha revisão</button></div></form>
+      <div class="panel" style="margin-top:1px"><div class="panel-head"><h3>Revisões anteriores</h3></div><div id="reviewHistory" class="review-history"></div></div>
+    </section>
+    <footer class="footer-note"><span>Feito para ajudar, não para cobrar. Seus dados ficam neste dispositivo.</span><div class="footer-actions"><button id="exportBtn">↓ Backup</button><button id="importBtn">↑ Restaurar</button><input id="importFile" type="file" accept="application/json" hidden></div></footer>
+  </main>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><div class="modal-head"><h2 id="modalTitle">Adicionar</h2><button class="close" id="closeModal" aria-label="Fechar">×</button></div><form id="modalForm" class="form-grid"></form></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(() => {
+  const KEY='nicko-proatividade-v1';
+  const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;};
+  const dateBR=(d)=>{if(!d)return 'Sem prazo';const [y,m,day]=d.split('-');return `${day}/${m}/${y}`};
+  const uid=()=>Math.random().toString(36).slice(2,10);
+  const escapeHTML=(s='')=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const starter=()=>({tasks:[],habits:[{id:uid(),name:'Planejar meu dia',emoji:'🗓️',frequency:'Todos os dias',checks:[]},{id:uid(),name:'Aprender por 10 minutos',emoji:'📚',frequency:'Todos os dias',checks:[]},{id:uid(),name:'Fazer uma pausa para mim',emoji:'☕',frequency:'Todos os dias',checks:[]}],projects:[],inbox:[],reviews:[]});
+  let data;
+  try{data=JSON.parse(localStorage.getItem(KEY))||starter()}catch{data=starter()}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){toast('O navegador não permitiu salvar neste dispositivo. Use a opção Backup após habilitar o armazenamento.')}render()}
+  function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),2400)}
+  function isDone(h){return h.checks.includes(today())}
+  function taskDate(t){return t.date||today()}
+  function taskIsOverdue(t){return !t.done&&taskDate(t)<today()}
+  function streak(h){let n=0,d=new Date();while(true){const key=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;if(h.checks.includes(key)){n++;d.setDate(d.getDate()-1)}else break}return n}
+  function setView(name){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+name));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===name));if(name==='review')renderReviews();window.scrollTo({top:0,behavior:'smooth'})}
+  document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+  document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.go)));
+  document.getElementById('todayDate').textContent=new Intl.DateTimeFormat('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date());
+  const hr=new Date().getHours();document.getElementById('greeting').textContent=hr<12?'BOM DIA':hr<18?'BOA TARDE':'BOA NOITE';
+
+  function taskHTML(t){return `<div class="task-row ${t.done?'completed':''}"><button class="check ${t.done?'done':''}" data-task-toggle="${t.id}" aria-label="${t.done?'Reabrir':'Concluir'} tarefa">${t.done?'✓':''}</button><div class="task-main"><b>${escapeHTML(t.title)}</b><small>${escapeHTML(t.category||'Pessoal')} · ${taskIsOverdue(t)?'Atrasada':dateBR(taskDate(t))}</small></div><span class="priority ${(t.priority||'media').toLowerCase()}">${t.priority||'Média'}</span><button class="text-btn" data-task-delete="${t.id}" aria-label="Excluir tarefa">×</button></div>`}
+  function habitToggleHTML(h,mini=false){const done=isDone(h);return mini?`<div class="mini-habit"><div><b>${escapeHTML(h.emoji)} ${escapeHTML(h.name)}</b><small>${streak(h)} dia(s) de sequência</small></div><button class="habit-toggle ${done?'done':''}" data-habit-toggle="${h.id}">${done?'Feito ✓':'Marcar'}</button></div>`:`<article class="habit-card"><div class="habit-card-top"><div class="habit-emoji">${escapeHTML(h.emoji)}</div><span class="priority baixa">${escapeHTML(h.frequency||'Diário')}</span></div><h3>${escapeHTML(h.name)}</h3><p>Um passo possível, no seu ritmo.</p><div class="habit-card-foot"><small>🔥 ${streak(h)} dia(s) de sequência</small><button class="${done?'done':''}" data-habit-toggle="${h.id}">${done?'Praticado hoje ✓':'Marcar como feito'}</button></div><div style="display:flex;justify-content:flex-end;margin-top:8px"><button class="text-btn" style="font-size:10px" data-habit-delete="${h.id}">Remover hábito</button></div></article>`}
+  function empty(icon,title,desc){return `<div class="empty"><div class="empty-ico">${icon}</div><b>${title}</b><p>${desc}</p></div>`}
+  function renderToday(){
+    const open=data.tasks.filter(t=>!t.done),due=data.tasks.filter(t=>!t.done&&taskDate(t)<=today()),doneToday=data.tasks.filter(t=>t.done&&t.completed===today());
+    const habitsDone=data.habits.filter(isDone).length;
+    const total=due.length+data.habits.length;const completed=doneToday.length+habitsDone;const pct=total?Math.min(100,Math.round(completed/total*100)):0;
+    document.getElementById('dayRing').style.setProperty('--progress',(pct*3.6)+'deg');document.getElementById('dayPercent').textContent=pct+'%';document.getElementById('dayProgressBar').style.width=pct+'%';document.getElementById('dayRingText').textContent=total?`${completed} de ${total} ações concluídas`:'Quando começar, seu progresso aparece aqui.';
+    document.getElementById('tasksDoneStat').textContent=`${doneToday.length}/${due.length+doneToday.length}`;
+    document.getElementById('habitsDoneStat').textContent=`${habitsDone}/${data.habits.length}`;document.getElementById('openTasksStat').textContent=open.length;
+    const todays=[...data.tasks].filter(t=>!t.done&&taskDate(t)<=today()).sort((a,b)=>(a.date||'').localeCompare(b.date||'')).slice(0,5);
+    document.getElementById('todayTaskList').innerHTML=todays.length?todays.map(taskHTML).join(''):empty('🌿','Sem tarefas urgentes por aqui','Adicione uma tarefa ou aproveite esse espaço livre.');
+    document.getElementById('todayHabitList').innerHTML=data.habits.length?data.habits.slice(0,4).map(h=>habitToggleHTML(h,true)).join(''):empty('↻','Nenhum hábito cadastrado','Crie um hábito pequeno para começar.');
+    const suggestion=document.getElementById('suggestionBox');const overdue=open.filter(taskIsOverdue).sort((a,b)=>(a.date||'').localeCompare(b.date||''));const next=overdue[0]||todays[0]||open[0];
+    if(next){suggestion.innerHTML=`<div class="tag">Sugestão simples</div><h4>${overdue.length?'Retome uma pendência':'Escolha uma pequena ação'}</h4><p>Que tal dedicar cinco minutos a <b>${escapeHTML(next.title)}</b>? Você não precisa terminar agora; só começar.</p><button data-start-task="${next.id}">Começar por 5 minutos →</button>`}
+    else if(data.habits.some(h=>!isDone(h))){const h=data.habits.find(x=>!isDone(x));suggestion.innerHTML=`<div class="tag">Um próximo passo gentil</div><h4>Cuide de um hábito</h4><p>Você pode começar com <b>${escapeHTML(h.name)}</b>. Faça a versão mais simples possível.</p><button data-habit-toggle="${h.id}">Marcar como praticado →</button>`}
+    else{suggestion.innerHTML=`<div class="tag">Você abriu espaço</div><h4>Que tal escolher uma intenção?</h4><p>Registre uma ideia, organize algo pequeno ou simplesmente aproveite uma pausa sem culpa.</p><button data-go="inbox">Anotar uma ideia →</button>`}
+  }
+  function renderTasks(){const q=(document.getElementById('taskSearch').value||'').toLowerCase();const f=document.getElementById('taskFilter').value;let list=data.tasks.filter(t=>t.title.toLowerCase().includes(q));if(f==='open')list=list.filter(t=>!t.done);if(f==='done')list=list.filter(t=>t.done);if(f==='today')list=list.filter(t=>taskDate(t)===today()&&!t.done);if(f==='overdue')list=list.filter(taskIsOverdue);list.sort((a,b)=>(a.done-b.done)||(a.date||'').localeCompare(b.date||''));document.getElementById('allTaskList').innerHTML=list.length?list.map(taskHTML).join(''):empty('☷','Nenhuma tarefa encontrada','Adicione uma tarefa ou experimente outro filtro.');}
+  function renderHabits(){document.getElementById('habitGrid').innerHTML=data.habits.length?data.habits.map(habitToggleHTML).join(''):empty('↻','Vamos começar com um hábito?','Escolha algo pequeno que você gostaria de praticar.')}
+  function renderProjects(){document.getElementById('projectGrid').innerHTML=data.projects.length?data.projects.map(p=>`<article class="project-card"><div class="project-top"><div class="habit-emoji">${escapeHTML(p.emoji||'🎯')}</div><button class="text-btn" data-project-delete="${p.id}" aria-label="Excluir projeto">×</button></div><h3>${escapeHTML(p.name)}</h3><p>${escapeHTML(p.description||'Um objetivo em construção.')}</p><div class="progress-track"><span style="width:${Math.max(0,Math.min(100,Number(p.progress)||0))}%"></span></div><div class="project-meta"><span>${Number(p.progress)||0}% concluído</span><span>${p.deadline?'Até '+dateBR(p.deadline):'Sem prazo'}</span></div><div class="next-step"><b>Próximo passo</b>${escapeHTML(p.next||'Definir a primeira ação')}</div><div style="display:flex;gap:7px;margin-top:13px"><button class="secondary" style="flex:1;font-size:10px" data-project-progress="${p.id}">+10% progresso</button><button class="secondary" style="font-size:10px" data-project-edit="${p.id}">Editar</button></div></article>`).join(''):empty('◎','Seus projetos começam aqui','Cadastre um objetivo e defina apenas o próximo passo.')}
+  function renderInbox(){document.getElementById('inboxList').innerHTML=data.inbox.length?data.inbox.map(i=>`<div class="inbox-item"><span>${escapeHTML(i.text)}</span><button data-inbox-task="${i.id}">Virar tarefa</button><button data-inbox-delete="${i.id}" aria-label="Excluir ideia">Excluir</button></div>`).join(''):empty('⌑','Sua cabeça pode descansar','As ideias que você guardar aparecerão aqui.')}
+  function renderReviews(){document.getElementById('reviewHistory').innerHTML=data.reviews.length?data.reviews.slice().reverse().map(r=>`<div class="review-entry"><b>${dateBR(r.date)}</b><p><strong>Conquistas:</strong> ${escapeHTML(r.win||'—')}<br><strong>Próximo foco:</strong> ${escapeHTML(r.next||'—')}</p></div>`).join(''):empty('♡','Nenhuma revisão salva ainda','Quando fizer sua primeira revisão, ela ficará guardada aqui.')}
+  function render(){renderToday();renderTasks();renderHabits();renderProjects();renderInbox();renderReviews()}
+
+  const backdrop=document.getElementById('modalBackdrop'),form=document.getElementById('modalForm');
+  function openModal(type,editId){let title='',html='',submit='Salvar';
+    if(type==='task'){const t=data.tasks.find(x=>x.id===editId)||{};title=editId?'Editar tarefa':'Nova tarefa';html=`<div class="form-field"><label for="fTitle">O que precisa ser feito?</label><input id="fTitle" name="title" required maxlength="100" value="${escapeHTML(t.title||'')}" placeholder="Ex.: Separar documentos"></div><div class="form-row"><div class="form-field"><label for="fDate">Quando?</label><input id="fDate" name="date" type="date" value="${t.date||today()}"></div><div class="form-field"><label for="fPriority">Prioridade</label><select id="fPriority" name="priority"><option ${t.priority==='Alta'?'selected':''}>Alta</option><option ${!t.priority||t.priority==='Média'?'selected':''}>Média</option><option ${t.priority==='Baixa'?'selected':''}>Baixa</option></select></div></div><div class="form-field"><label for="fCategory">Área</label><select id="fCategory" name="category"><option ${t.category==='Pessoal'?'selected':''}>Pessoal</option><option ${t.category==='Trabalho'?'selected':''}>Trabalho</option><option ${t.category==='Estudos'?'selected':''}>Estudos</option><option ${t.category==='Casa'?'selected':''}>Casa</option><option ${t.category==='Saúde'?'selected':''}>Saúde</option><option ${t.category==='Outro'?'selected':''}>Outro</option></select></div>`;
+    }else if(type==='habit'){title='Novo hábito';html=`<div class="form-field"><label for="fName">Qual hábito você quer cultivar?</label><input id="fName" name="name" required maxlength="65" placeholder="Ex.: Caminhar por 10 minutos"></div><div class="form-row"><div class="form-field"><label for="fEmoji">Ícone</label><input id="fEmoji" name="emoji" value="🌱" maxlength="4"></div><div class="form-field"><label for="fFrequency">Frequência desejada</label><select id="fFrequency" name="frequency"><option>Todos os dias</option><option>Durante a semana</option><option>3 vezes por semana</option><option>1 vez por semana</option></select></div></div><p style="font-size:10px;color:var(--muted);margin:0">Escolha uma versão pequena o suficiente para caber na sua rotina.</p>`;
+    }else if(type==='project'){const p=data.projects.find(x=>x.id===editId)||{};title=editId?'Editar projeto':'Novo projeto';html=`<div class="form-field"><label for="fName">Nome do objetivo</label><input id="fName" name="name" required maxlength="65" value="${escapeHTML(p.name||'')}" placeholder="Ex.: Montar meu portfólio"></div><div class="form-field"><label for="fDescription">Por que isso importa? (opcional)</label><textarea id="fDescription" name="description" maxlength="180" placeholder="Uma frase sobre esse objetivo">${escapeHTML(p.description||'')}</textarea></div><div class="form-field"><label for="fNext">Próxima ação concreta</label><input id="fNext" name="next" maxlength="100" value="${escapeHTML(p.next||'')}" placeholder="Ex.: Separar três trabalhos"></div><div class="form-row"><div class="form-field"><label for="fEmoji">Ícone</label><input id="fEmoji" name="emoji" value="${escapeHTML(p.emoji||'🎯')}" maxlength="4"></div><div class="form-field"><label for="fDeadline">Prazo (opcional)</label><input id="fDeadline" name="deadline" type="date" value="${p.deadline||''}"></div></div><div class="form-field"><label for="fProgress">Progresso: <span id="progressLabel">${Number(p.progress)||0}%</span></label><input id="fProgress" name="progress" type="range" min="0" max="100" step="5" value="${Number(p.progress)||0}" oninput="document.getElementById('progressLabel').textContent=this.value+'%'"></div>`;
+    }
+    document.getElementById('modalTitle').textContent=title;form.innerHTML=html+`<div class="modal-actions"><button type="button" class="secondary" id="cancelModal">Cancelar</button><button class="primary">${submit}</button></div>`;form.dataset.type=type;form.dataset.editId=editId||'';backdrop.classList.add('open');setTimeout(()=>form.querySelector('input')?.focus(),50);document.getElementById('cancelModal').onclick=closeModal;
+  }
+  function closeModal(){backdrop.classList.remove('open');form.reset()}
+  document.querySelectorAll('[data-modal]').forEach(b=>b.addEventListener('click',()=>openModal(b.dataset.modal)));
+  document.getElementById('quickCapture').addEventListener('click',()=>{setView('inbox');document.getElementById('inboxInput').focus()});
+  document.getElementById('closeModal').onclick=closeModal;backdrop.addEventListener('click',e=>{if(e.target===backdrop)closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+  form.addEventListener('submit',e=>{e.preventDefault();const fd=new FormData(form),v=Object.fromEntries(fd.entries()),type=form.dataset.type,id=form.dataset.editId;
+    if(type==='task'){if(id){Object.assign(data.tasks.find(x=>x.id===id),v)}else data.tasks.push({id:uid(),...v,done:false})}
+    if(type==='habit')data.habits.push({id:uid(),...v,checks:[]});
+    if(type==='project'){if(id)Object.assign(data.projects.find(x=>x.id===id),v);else data.projects.push({id:uid(),...v})}
+    closeModal();save();toast(type==='task'?'Tarefa salva. Um passo de cada vez!':type==='habit'?'Hábito adicionado. Comece pequeno!':'Projeto salvo. Seu próximo passo está definido.');
+  });
+  document.addEventListener('click',e=>{
+    const el=e.target.closest('[data-task-toggle]');if(el){const t=data.tasks.find(x=>x.id===el.dataset.taskToggle);t.done=!t.done;t.completed=t.done?today():null;save();toast(t.done?'Tarefa concluída. Muito bem!':'Tarefa reaberta.');return}
+    const del=e.target.closest('[data-task-delete]');if(del){data.tasks=data.tasks.filter(t=>t.id!==del.dataset.taskDelete);save();toast('Tarefa removida.');return}
+    const ht=e.target.closest('[data-habit-toggle]');if(ht){const h=data.habits.find(x=>x.id===ht.dataset.habitToggle);h.checks=isDone(h)?h.checks.filter(d=>d!==today()):[...h.checks,today()];save();toast(isDone(h)?'Hábito marcado. Você conseguiu!':'Registro ajustado.');return}
+    const hd=e.target.closest('[data-habit-delete]');if(hd){data.habits=data.habits.filter(h=>h.id!==hd.dataset.habitDelete);save();toast('Hábito removido.');return}
+    const pd=e.target.closest('[data-project-delete]');if(pd){data.projects=data.projects.filter(p=>p.id!==pd.dataset.projectDelete);save();toast('Projeto removido.');return}
+    const pp=e.target.closest('[data-project-progress]');if(pp){const p=data.projects.find(x=>x.id===pp.dataset.projectProgress);p.progress=Math.min(100,(Number(p.progress)||0)+10);save();toast('Progresso atualizado!');return}
+    const pe=e.target.closest('[data-project-edit]');if(pe){openModal('project',pe.dataset.projectEdit);return}
+    const it=e.target.closest('[data-inbox-delete]');if(it){data.inbox=data.inbox.filter(i=>i.id!==it.dataset.inboxDelete);save();return}
+    const convert=e.target.closest('[data-inbox-task]');if(convert){const item=data.inbox.find(i=>i.id===convert.dataset.inboxTask);data.tasks.push({id:uid(),title:item.text,date:today(),priority:'Média',category:'Pessoal',done:false});data.inbox=data.inbox.filter(i=>i.id!==item.id);save();toast('Ideia transformada em tarefa.');return}
+    const start=e.target.closest('[data-start-task]');if(start){const t=data.tasks.find(x=>x.id===start.dataset.startTask);startFiveMinute(t);return}
+    const go=e.target.closest('[data-go]');if(go){setView(go.dataset.go);return}
+  });
+  document.getElementById('taskSearch').addEventListener('input',renderTasks);document.getElementById('taskFilter').addEventListener('change',renderTasks);
+  document.getElementById('inboxForm').addEventListener('submit',e=>{e.preventDefault();const input=document.getElementById('inboxInput');data.inbox.push({id:uid(),text:input.value.trim()});input.value='';save();toast('Ideia guardada. Pode tirar isso da cabeça.');});
+  document.getElementById('reviewForm').addEventListener('submit',e=>{e.preventDefault();data.reviews.push({date:today(),win:document.getElementById('reviewWin').value,hard:document.getElementById('reviewHard').value,learn:document.getElementById('reviewLearn').value,next:document.getElementById('reviewNext').value});e.target.reset();save();toast('Sua revisão foi salva. Obrigado por olhar para sua semana com carinho.');});
+  document.getElementById('exportBtn').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`nicko-backup-${today()}.json`;a.click();URL.revokeObjectURL(a.href);toast('Backup preparado. Guarde o arquivo em um lugar seguro.');});
+  document.getElementById('importBtn').addEventListener('click',()=>document.getElementById('importFile').click());
+  document.getElementById('importFile').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{const obj=JSON.parse(await file.text());if(!obj||!Array.isArray(obj.tasks)||!Array.isArray(obj.habits)||!Array.isArray(obj.projects)||!Array.isArray(obj.inbox)||!Array.isArray(obj.reviews))throw new Error('Arquivo inválido');data=obj;save();toast('Backup restaurado com sucesso.')}catch{toast('Não consegui ler esse backup. Confira o arquivo.')}e.target.value='';});
+  let focusInterval=null;
+  function startFiveMinute(task){
+    if(focusInterval)clearInterval(focusInterval);
+    let remaining=300;const box=document.getElementById('suggestionBox');
+    const draw=()=>{const mm=String(Math.floor(remaining/60)).padStart(2,'0'),ss=String(remaining%60).padStart(2,'0');box.innerHTML=`<div class=\"tag\">Seu momento de foco</div><h4>Comece sem se cobrar.</h4><p>Agora, dedique alguns minutos a <b>${escapeHTML(task.title)}</b>. Um começo pequeno já vale.</p><div style=\"display:flex;align-items:center;justify-content:space-between;gap:10px\"><strong id=\"focusClock\" style=\"font-size:28px;color:var(--blue-dark);letter-spacing:-.04em\">${mm}:${ss}</strong><button id=\"cancelFocus\">Encerrar</button></div>`;};
+    draw();toast('Seu bloco de 5 minutos começou. Vai no seu ritmo!');
+    focusInterval=setInterval(()=>{remaining--;if(remaining<=0){clearInterval(focusInterval);focusInterval=null;box.innerHTML=`<div class=\"tag\">Você começou — isso importa!</div><h4>Seus cinco minutos terminaram.</h4><p>Quer continuar mais um pouco ou encerrar por aqui? As duas opções estão bem.</p><button id=\"restoreSuggestion\">Voltar à sugestão</button>`;toast('Cinco minutos concluídos. Parabéns pelo começo!');return}const clock=document.getElementById('focusClock');if(clock)clock.textContent=`${String(Math.floor(remaining/60)).padStart(2,'0')}:${String(remaining%60).padStart(2,'0')}`;},1000);
+    box.addEventListener('click',function handler(e){if(e.target.id==='cancelFocus'||e.target.id==='restoreSuggestion'){if(focusInterval)clearInterval(focusInterval);focusInterval=null;box.removeEventListener('click',handler);renderToday();}});
+  }
+  render();
+  if('serviceWorker' in navigator && location.protocol!=='file:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+})();
+</script>
+</body>
+</html>
