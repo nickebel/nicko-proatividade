@@ -56,6 +56,44 @@ main{min-width:0}.view{display:none;animation:page-arrive .35s var(--ease) both}
 @media(max-width:760px){.site-shell{width:calc(100% - 32px);padding-top:17px}.masthead{grid-template-columns:1fr auto;gap:13px}.dashboard-heading{grid-column:1/-1;grid-row:1;text-align:left;padding-bottom:10px;border-bottom:1px dotted var(--line)}.brandline{grid-column:1;grid-row:2}.masthead-meta{grid-column:2;grid-row:2}.year-wrap{justify-content:flex-start}.masthead-meta .date-label{max-width:110px;font-size:7px}.welcome-strip{align-items:flex-start;flex-direction:column;gap:7px}.welcome-note{text-align:left}.dashboard-grid{grid-template-columns:1fr;gap:4px}.gallery-column{grid-column:auto}.gallery-stack{grid-template-columns:repeat(3,minmax(0,1fr))}.gallery-card img,.gallery-card:first-child img{height:145px}.routine-column,.center-column,.gallery-column{min-width:0}.column-heading{margin-top:12px}.mixtape-card{padding:15px}.footer-note{align-items:flex-start;flex-direction:column}}
 @media(max-width:520px){.site-shell{width:calc(100% - 24px)}.nav{gap:16px}.nav button{font-size:7px}.quiet-action{padding:5px 7px;font-size:7px}.avatar{width:26px;height:26px}.date-label{max-width:90px;white-space:normal}.gallery-stack{grid-template-columns:1fr}.gallery-card img,.gallery-card:first-child img{height:190px}.gallery-note{display:block}.habit-card-grid,.project-grid,.review-grid{grid-template-columns:1fr}.inbox-form{flex-direction:column}.toolbar{gap:10px}.toolbar .field{min-width:100%}.spotify-form{flex-direction:column}.spotify-submit{align-self:flex-start}.mixtape-art{grid-template-columns:82px minmax(0,1fr)}.vinyl-record{width:78px;height:78px}.vinyl-record:before{inset:17px}.vinyl-record:after{left:38px;top:38px}.form-row{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* NICKO RADIO / METROLIST — player de áudio local */
+.audio-track-info{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:1px 0 13px}
+.audio-track-copy{display:grid;gap:3px;min-width:0}
+.audio-status{color:var(--accent);font-family:var(--mono);font-size:7px;letter-spacing:.1em;text-transform:uppercase}
+.audio-track-copy strong{overflow:hidden;color:var(--text);font-family:var(--serif);font-size:15px;font-weight:400;text-overflow:ellipsis;white-space:nowrap}
+.audio-track-copy small{overflow:hidden;color:var(--muted-dim);font-family:var(--mono);font-size:7px;text-overflow:ellipsis;white-space:nowrap}
+.audio-track-index{flex:0 0 auto;color:var(--muted-dim);font-family:var(--mono);font-size:8px}
+.audio-timeline{margin-top:4px}
+.audio-progress{display:block;width:100%;height:4px;margin:0;appearance:none;-webkit-appearance:none;border:0;border-radius:10px;background:linear-gradient(90deg,var(--accent-soft),var(--clay));cursor:pointer}
+.audio-progress:disabled{cursor:default;opacity:.45}
+.audio-progress::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border:2px solid var(--text);border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(178,138,109,.12)}
+.audio-progress::-moz-range-thumb{width:9px;height:9px;border:2px solid var(--text);border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(178,138,109,.12)}
+.audio-times{display:flex;justify-content:space-between;margin-top:7px;color:var(--muted-dim);font-family:var(--mono);font-size:8px;font-variant-numeric:tabular-nums}
+.audio-controls{display:flex;align-items:center;justify-content:center;gap:18px;margin:15px 0 17px}
+.audio-control{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--clay-light);border-radius:50%;background:rgba(20,16,13,.35);color:var(--muted);font-size:17px;line-height:1;transition:background .2s,border-color .2s,color .2s,transform .2s}
+.audio-control:hover:not(:disabled){transform:translateY(-1px);border-color:var(--accent);color:var(--text)}
+.audio-control:disabled{opacity:.35;cursor:not-allowed}
+.audio-control.audio-play{width:45px;height:45px;border-color:var(--accent-soft);background:#4a3b32;color:var(--text);font-size:16px;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+.audio-control.audio-play:hover:not(:disabled){background:#5a4638}
+.audio-source-area{padding-top:13px;border-top:1px dotted rgba(181,164,148,.2)}
+.audio-url-form{display:flex;gap:7px;min-width:0}
+.audio-url-field{width:100%;min-width:0;padding:9px 10px;border:1px solid var(--clay);border-radius:2px;background:rgba(18,15,13,.58);color:var(--text);font-family:var(--mono);font-size:8px}
+.audio-url-field::placeholder{color:#8e7c6f}
+.audio-url-field:focus{border-color:var(--accent);outline:none}
+.audio-load-button,.audio-file-button{flex:0 0 auto;padding:8px 10px;border:1px solid var(--clay-light);border-radius:2px;background:#4a3b32;color:var(--text);font-family:var(--mono);font-size:7px;letter-spacing:.02em;transition:background .2s,border-color .2s}
+.audio-load-button:hover,.audio-file-button:hover{border-color:var(--accent);background:#5a4638}
+.audio-file-row{display:flex;align-items:center;gap:9px;margin-top:9px}
+.audio-file-row span{color:var(--muted-dim);font-family:var(--mono);font-size:6px;letter-spacing:.03em}
+.audio-hint{margin:8px 0 0;color:var(--muted-dim);font-size:8px;line-height:1.5}
+.vinyl-record{animation-play-state:paused}
+.vinyl-record.is-playing{animation-play-state:running}
+@media(max-width:520px){
+  .audio-url-form{flex-direction:column}
+  .audio-load-button{align-self:flex-start}
+  .audio-file-row{align-items:flex-start;flex-direction:column;gap:6px}
+}
+
 </style>
 </head>
 <body>
@@ -96,16 +134,59 @@ main{min-width:0}.view{display:none;animation:page-arrive .35s var(--ease) both}
     </section>
     <section class="dashboard-column center-column" aria-label="Música e acompanhamento">
       <div class="column-heading"><span>02 / listening room</span><small>soundtrack for today</small></div>
-      <article class="mixtape-card">
-        <div class="mixtape-top"><span class="mixtape-label">NICKO RADIO / MIXTAPE NO. 01</span><span class="mixtape-number">SIDE A · 2026</span></div>
-        <div class="mixtape-art"><div class="vinyl-record" aria-hidden="true"></div><div class="mixtape-copy"><h3>soundtrack<br>for slow moments</h3><p>Uma trilha sonora para acompanhar seus estudos, pausas e pequenos começos.</p></div></div>
-        <div class="mixtape-rule"></div>
-        <div class="spotify-empty" id="spotifyEmpty"><strong>Sua mixtape começa aqui.</strong><p>Cole um link de faixa, álbum ou playlist do Spotify para abrir o player.</p></div>
-        <form class="spotify-form" id="spotifyForm"><input class="spotify-field" id="spotifyUrl" type="url" inputmode="url" placeholder="https://open.spotify.com/playlist/..." aria-label="Link de música, álbum ou playlist do Spotify"><button class="spotify-submit" type="submit">carregar ↗</button></form>
-        <p class="spotify-status" id="spotifyStatus" aria-live="polite">SPOTIFY EMBED / AGUARDANDO LINK</p>
-        <iframe class="spotify-player" id="spotifyPlayer" title="Player de música do Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
-        <a class="spotify-open" id="spotifyExternal" href="#" target="_blank" rel="noopener noreferrer" hidden>Abrir no Spotify ↗</a>
-      </article>
+      
+<article class="mixtape-card metrolist-card">
+  <div class="mixtape-top">
+    <span class="mixtape-label">NICKO RADIO / METROLIST</span>
+    <span class="mixtape-number">SIDE A · 2026</span>
+  </div>
+
+  <div class="mixtape-art">
+    <div class="vinyl-record" id="vinylRecord" aria-hidden="true"></div>
+    <div class="mixtape-copy">
+      <h3>side a<br>slow moments</h3>
+      <p>Uma trilha sonora para acompanhar seus estudos, pausas e pequenos começos.</p>
+    </div>
+  </div>
+
+  <div class="mixtape-rule"></div>
+
+  <div class="audio-track-info">
+    <div class="audio-track-copy">
+      <span class="audio-status" id="audioStatus" aria-live="polite">METROLIST PLAYER / PRONTO PARA TOCAR</span>
+      <strong id="trackTitle">Nenhuma faixa carregada</strong>
+      <small id="trackMeta">Adicione arquivos MP3 ou um link direto de áudio</small>
+    </div>
+    <span class="audio-track-index" id="trackIndex">— / —</span>
+  </div>
+
+  <audio id="audioElement" preload="metadata"></audio>
+
+  <div class="audio-timeline">
+    <input id="audioProgress" class="audio-progress" type="range" min="0" max="100" step="0.1" value="0" disabled aria-label="Progresso da música">
+    <div class="audio-times"><span id="audioCurrentTime">0:00</span><span id="audioDuration">0:00</span></div>
+  </div>
+
+  <div class="audio-controls" aria-label="Controles de reprodução">
+    <button class="audio-control" id="previousTrack" type="button" aria-label="Faixa anterior" title="Anterior" disabled>↶</button>
+    <button class="audio-control audio-play" id="togglePlayback" type="button" aria-label="Reproduzir" title="Reproduzir" disabled>▶</button>
+    <button class="audio-control" id="nextTrack" type="button" aria-label="Próxima faixa" title="Próxima" disabled>↷</button>
+  </div>
+
+  <div class="audio-source-area">
+    <form class="audio-url-form" id="audioUrlForm">
+      <input class="audio-url-field" id="audioUrl" type="url" inputmode="url" placeholder="Cole um link direto para .mp3 ou áudio" aria-label="Link direto de áudio" required>
+      <button class="audio-load-button" type="submit">carregar link ↗</button>
+    </form>
+    <div class="audio-file-row">
+      <input id="audioFileInput" type="file" accept="audio/*,.mp3,.m4a,.ogg,.wav,.flac" multiple hidden>
+      <button class="audio-file-button" id="chooseAudioFiles" type="button">＋ adicionar arquivos</button>
+      <span>MP3 · M4A · OGG · WAV · FLAC</span>
+    </div>
+    <p class="audio-hint">Arquivos locais ficam disponíveis nesta sessão do navegador. O link direto fica salvo neste dispositivo.</p>
+  </div>
+</article>
+
       <article class="widget day-card"><div class="day-progress-head"><h3>01 / Meu dia</h3><span id="dayPercent">0%</span></div>
         <div class="day-progress" id="dayRing"><span id="dayProgressBar"></span></div><p class="day-note" id="dayRingText">Seu progresso aparece aqui.</p>
         <div class="metrics-grid"><div class="metric-item"><strong class="metric-number" id="tasksDoneStat">0/0</strong><span class="metric-label">Tarefas hoje</span></div><div class="metric-item"><strong class="metric-number" id="habitsDoneStat">0/0</strong><span class="metric-label">Hábitos feitos</span></div><div class="metric-item"><strong class="metric-number" id="openTasksStat">0</strong><span class="metric-label">Em aberto</span></div></div>
@@ -173,7 +254,7 @@ main{min-width:0}.view{display:none;animation:page-arrive .35s var(--ease) both}
 <script>
 (() => {
   const KEY='nicko-proatividade-v1';
-  const SPOTIFY_KEY='nicko-spotify-embed-v1';
+  const AUDIO_URL_KEY='nicko-audio-url-v1';
   const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;};
   const dateBR=(d)=>{if(!d)return 'Sem prazo';const [y,m,day]=d.split('-');return `${day}/${m}/${y}`};
   const uid=()=>Math.random().toString(36).slice(2,10);
@@ -193,43 +274,135 @@ main{min-width:0}.view{display:none;animation:page-arrive .35s var(--ease) both}
   document.getElementById('todayDate').textContent=new Intl.DateTimeFormat('pt-BR',{weekday:'long',day:'numeric',month:'long'}).format(new Date());document.getElementById('yearLabel').textContent=String(new Date().getFullYear());
   const hr=new Date().getHours();document.getElementById('greeting').textContent=hr<12?'Bom Dia':hr<18?'Boa Tarde':'Boa Noite';
 
-  function parseSpotifyLink(raw){
-    try{
-      const url=new URL(String(raw||'').trim());
-      if(url.protocol!=='https:'||url.hostname!=='open.spotify.com')return null;
-      const parts=url.pathname.split('/').filter(Boolean);
-      if(parts[0]&&parts[0].startsWith('intl-'))parts.shift();
-      if(parts[0]==='embed')parts.shift();
-      const type=parts[0],id=parts[1];
-      const allowed=['track','album','playlist','episode'];
-      const validId=!!id&&id.split('').every(ch=>(ch>='a'&&ch<='z')||(ch>='A'&&ch<='Z')||(ch>='0'&&ch<='9'));
-      if(!allowed.includes(type)||!validId)return null;
-      return {type,id,embed:'https://open.spotify.com/embed/'+type+'/'+id+'?utm_source=generator&theme=0',canonical:'https://open.spotify.com/'+type+'/'+id};
-    }catch{return null}
+  const audioElement=document.getElementById('audioElement');
+  const audioProgress=document.getElementById('audioProgress');
+  const audioCurrentTime=document.getElementById('audioCurrentTime');
+  const audioDuration=document.getElementById('audioDuration');
+  const trackTitle=document.getElementById('trackTitle');
+  const trackMeta=document.getElementById('trackMeta');
+  const audioStatus=document.getElementById('audioStatus');
+  const trackIndexLabel=document.getElementById('trackIndex');
+  const playButton=document.getElementById('togglePlayback');
+  const previousButton=document.getElementById('previousTrack');
+  const nextButton=document.getElementById('nextTrack');
+  const vinylRecord=document.getElementById('vinylRecord');
+  let audioQueue=[];
+  let audioIndex=0;
+  function formatAudioTime(value){
+    if(!Number.isFinite(value)||value<0)return '0:00';
+    const total=Math.floor(value);
+    return Math.floor(total/60)+':'+String(total%60).padStart(2,'0');
   }
-  function loadSpotifyLink(raw,quiet=false){
-    const details=parseSpotifyLink(raw);
-    const status=document.getElementById('spotifyStatus');
-    if(!details){status.textContent='LINK NÃO RECONHECIDO · USE UM LINK DO SPOTIFY';return false;}
-    const frame=document.getElementById('spotifyPlayer');
-    frame.src=details.embed;
-    frame.style.height=(details.type==='playlist'||details.type==='album')?'352px':'152px';
-    frame.hidden=false;
-    document.getElementById('spotifyEmpty').hidden=true;
-    const external=document.getElementById('spotifyExternal');
-    external.href=details.canonical;external.hidden=false;
-    document.getElementById('spotifyUrl').value=details.canonical;
-    status.textContent='PLAYER CONECTADO · '+details.type.toUpperCase()+' / SPOTIFY';
-    try{localStorage.setItem(SPOTIFY_KEY,details.canonical)}catch{}
-    if(!quiet)toast('Sua mixtape foi carregada. Boa escuta!');
-    return true;
+  function updateAudioButtons(){
+    const hasTrack=audioQueue.length>0;
+    playButton.disabled=!hasTrack;
+    previousButton.disabled=!hasTrack;
+    nextButton.disabled=!hasTrack;
+    audioProgress.disabled=!hasTrack||!Number.isFinite(audioElement.duration)||audioElement.duration<=0;
+    trackIndexLabel.textContent=hasTrack?String(audioIndex+1).padStart(2,'0')+' / '+String(audioQueue.length).padStart(2,'0'):'— / —';
   }
-  document.getElementById('spotifyForm').addEventListener('submit',e=>{
-    e.preventDefault();
-    loadSpotifyLink(document.getElementById('spotifyUrl').value);
+  function updateAudioProgress(){
+    const duration=audioElement.duration;
+    audioCurrentTime.textContent=formatAudioTime(audioElement.currentTime);
+    audioDuration.textContent=formatAudioTime(duration);
+    if(Number.isFinite(duration)&&duration>0){
+      audioProgress.value=String((audioElement.currentTime/duration)*100);
+      audioProgress.disabled=false;
+    }else{audioProgress.value='0';audioProgress.disabled=true;}
+  }
+  function selectAudioTrack(index,autoPlay=false){
+    if(!audioQueue.length)return;
+    audioIndex=(index+audioQueue.length)%audioQueue.length;
+    const track=audioQueue[audioIndex];
+    audioElement.pause();
+    audioElement.src=track.src;
+    audioElement.load();
+    trackTitle.textContent=track.title;
+    trackMeta.textContent=track.meta||('FAIXA '+String(audioIndex+1).padStart(2,'0'));
+    audioStatus.textContent='METROLIST PLAYER / CARREGANDO FAIXA';
+    audioCurrentTime.textContent='0:00';
+    audioDuration.textContent='0:00';
+    audioProgress.value='0';
+    audioProgress.disabled=true;
+    vinylRecord.classList.remove('is-playing');
+    playButton.textContent='▶';
+    playButton.setAttribute('aria-label','Reproduzir');
+    updateAudioButtons();
+    if(autoPlay){
+      audioElement.play().catch(()=>{audioStatus.textContent='NÃO FOI POSSÍVEL REPRODUZIR ESTA FAIXA';});
+    }
+  }
+  function releaseAudioQueue(){
+    audioElement.pause();
+    audioQueue.forEach(track=>{if(track.objectUrl)URL.revokeObjectURL(track.src);});
+    audioQueue=[];audioIndex=0;
+    audioElement.removeAttribute('src');audioElement.load();
+    vinylRecord.classList.remove('is-playing');
+    playButton.textContent='▶';playButton.setAttribute('aria-label','Reproduzir');
+    audioProgress.value='0';audioProgress.disabled=true;
+    audioCurrentTime.textContent='0:00';audioDuration.textContent='0:00';
+    trackTitle.textContent='Nenhuma faixa carregada';
+    trackMeta.textContent='Adicione arquivos MP3 ou um link direto de áudio';
+    audioStatus.textContent='METROLIST PLAYER / PRONTO PARA TOCAR';
+    updateAudioButtons();
+  }
+  function loadAudioQueue(tracks,sourceLabel){
+    releaseAudioQueue();
+    if(!tracks.length)return;
+    audioQueue=tracks;
+    selectAudioTrack(0,false);
+    audioStatus.textContent=sourceLabel;
+    updateAudioButtons();
+  }
+  document.getElementById('audioFileInput').addEventListener('change',event=>{
+    const files=Array.from(event.target.files||[]).filter(file=>file.type.startsWith('audio/')||/\.(mp3|m4a|ogg|wav|flac)$/i.test(file.name));
+    if(!files.length){audioStatus.textContent='NENHUM ARQUIVO DE ÁUDIO VÁLIDO';return;}
+    try{localStorage.removeItem(AUDIO_URL_KEY);}catch{}
+    const tracks=files.map((file,index)=>({src:URL.createObjectURL(file),title:file.name.replace(/\.[^.]+$/,''),meta:'ARQUIVO LOCAL · '+String(index+1).padStart(2,'0')+' DE '+String(files.length).padStart(2,'0'),objectUrl:true}));
+    loadAudioQueue(tracks,'ARQUIVOS LOCAIS / '+files.length+' FAIXA(S) NA FILA');
+    toast(files.length===1?'Arquivo carregado. Aperte play para ouvir.':files.length+' faixas adicionadas à fila.');
+    event.target.value='';
   });
-  const savedSpotifyLink=localStorage.getItem(SPOTIFY_KEY);
-  if(savedSpotifyLink)loadSpotifyLink(savedSpotifyLink,true);
+  document.getElementById('chooseAudioFiles').addEventListener('click',()=>document.getElementById('audioFileInput').click());
+  document.getElementById('audioUrlForm').addEventListener('submit',event=>{
+    event.preventDefault();
+    const raw=document.getElementById('audioUrl').value.trim();
+    let url;
+    try{url=new URL(raw);}catch{audioStatus.textContent='LINK INVÁLIDO · COLE O ENDEREÇO DIRETO DO ÁUDIO';return;}
+    if(!['http:','https:'].includes(url.protocol)){audioStatus.textContent='USE UM LINK HTTP OU HTTPS DE ÁUDIO';return;}
+    try{localStorage.setItem(AUDIO_URL_KEY,url.href);}catch{}
+    loadAudioQueue([{src:url.href,title:decodeURIComponent(url.pathname.split('/').pop()||'Faixa online'),meta:'LINK DIRETO · ÁUDIO ONLINE',objectUrl:false}],'LINK DIRETO / PRONTO PARA TOCAR');
+    toast('Link carregado. Aperte play para ouvir.');
+  });
+  playButton.addEventListener('click',()=>{
+    if(!audioQueue.length){audioStatus.textContent='CARREGUE UMA FAIXA PARA COMEÇAR';return;}
+    if(audioElement.paused){audioElement.play().catch(()=>{audioStatus.textContent='ERRO AO REPRODUZIR · VERIFIQUE O ARQUIVO OU LINK';});}
+    else audioElement.pause();
+  });
+  previousButton.addEventListener('click',()=>{
+    if(!audioQueue.length)return;
+    if(audioElement.currentTime>3){audioElement.currentTime=0;return;}
+    selectAudioTrack(audioIndex-1,true);
+  });
+  nextButton.addEventListener('click',()=>{if(audioQueue.length)selectAudioTrack(audioIndex+1,true);});
+  audioProgress.addEventListener('input',()=>{
+    if(Number.isFinite(audioElement.duration)&&audioElement.duration>0){audioElement.currentTime=(Number(audioProgress.value)/100)*audioElement.duration;}
+  });
+  audioElement.addEventListener('loadedmetadata',()=>{
+    updateAudioProgress();
+    audioStatus.textContent='METROLIST PLAYER / TOCANDO SUA COLEÇÃO';
+    updateAudioButtons();
+  });
+  audioElement.addEventListener('timeupdate',updateAudioProgress);
+  audioElement.addEventListener('durationchange',updateAudioProgress);
+  audioElement.addEventListener('play',()=>{playButton.textContent='Ⅱ';playButton.setAttribute('aria-label','Pausar');vinylRecord.classList.add('is-playing');audioStatus.textContent='NOW PLAYING / NICKO RADIO';});
+  audioElement.addEventListener('pause',()=>{playButton.textContent='▶';playButton.setAttribute('aria-label','Reproduzir');vinylRecord.classList.remove('is-playing');});
+  audioElement.addEventListener('ended',()=>{if(audioQueue.length>1)selectAudioTrack(audioIndex+1,true);else{playButton.textContent='▶';audioStatus.textContent='FAIXA CONCLUÍDA';}});
+  audioElement.addEventListener('error',()=>{if(audioQueue.length)audioStatus.textContent='NÃO FOI POSSÍVEL ABRIR O ÁUDIO · TENTE UM MP3 OU LINK DIRETO';});
+  const savedAudioUrl=localStorage.getItem(AUDIO_URL_KEY);
+  if(savedAudioUrl){document.getElementById('audioUrl').value=savedAudioUrl;loadAudioQueue([{src:savedAudioUrl,title:'Faixa online salva',meta:'LINK DIRETO · SALVO NESTE DISPOSITIVO',objectUrl:false}],'LINK SALVO / PRONTO PARA TOCAR');}
+
+  
 
   function taskHTML(t){return `<div class="task-row ${t.done?'completed':''}"><button class="check ${t.done?'done':''}" data-task-toggle="${t.id}" aria-label="${t.done?'Reabrir':'Concluir'} tarefa">${t.done?'✓':''}</button><div class="task-main"><b>${escapeHTML(t.title)}</b><small>${escapeHTML(t.category||'Pessoal')} · ${taskIsOverdue(t)?'Atrasada':dateBR(taskDate(t))}</small></div><span class="priority ${(t.priority||'media').toLowerCase()}">${t.priority||'Média'}</span><button class="text-btn" data-task-delete="${t.id}" aria-label="Excluir tarefa">×</button></div>`}
   function habitToggleHTML(h,mini=false){const done=isDone(h);return mini?`<div class="mini-habit"><div><b>${escapeHTML(h.emoji)} ${escapeHTML(h.name)}</b><small>${streak(h)} dia(s) de sequência</small></div><button class="habit-toggle ${done?'done':''}" data-habit-toggle="${h.id}">${done?'Feito ✓':'Marcar'}</button></div>`:`<article class="habit-card"><div class="habit-card-top"><div class="habit-emoji">${escapeHTML(h.emoji)}</div><span class="priority baixa">${escapeHTML(h.frequency||'Diário')}</span></div><h3>${escapeHTML(h.name)}</h3><p>Um passo possível, no seu ritmo.</p><div class="habit-card-foot"><small>🔥 ${streak(h)} dia(s) de sequência</small><button class="${done?'done':''}" data-habit-toggle="${h.id}">${done?'Praticado hoje ✓':'Marcar como feito'}</button></div><div style="display:flex;justify-content:flex-end;margin-top:8px"><button class="text-btn" style="font-size:10px" data-habit-delete="${h.id}">Remover hábito</button></div></article>`}
