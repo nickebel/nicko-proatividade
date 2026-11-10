@@ -4,8 +4,8 @@
   "description": "Um espaço escuro e imersivo para organizar o cotidiano e cultivar pequenas mudanças.",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#151d20",
-  "theme_color": "#151d20",
+  "background_color": "#111416",
+  "theme_color": "#111416",
   "icons": [
     {
       "src": "icon.svg",
