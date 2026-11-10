@@ -1,0 +1,17 @@
+{
+  "name": "Nicko — Espaço pessoal",
+  "short_name": "Nicko",
+  "description": "Um espaço escuro e imersivo para organizar o cotidiano e cultivar pequenas mudanças.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#151d20",
+  "theme_color": "#151d20",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
