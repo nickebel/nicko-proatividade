@@ -285,7 +285,7 @@ main{min-width:0}.view{display:none;animation:page-arrive .35s var(--ease) both}
       const value=String(raw||'').trim();
       if(!value)return null;
       const url=new URL(value.includes('://')?value:'https://'+value);
-      const host=url.hostname.toLowerCase().replace(/^www\\./,'');
+      const host=url.hostname.toLowerCase().replace(/^www\./,'');
       let videoId='';
       if(host==='youtu.be'){
         videoId=url.pathname.split('/').filter(Boolean)[0]||'';
