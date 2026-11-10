@@ -1,0 +1,30 @@
+NICKO — ESPAÇO PESSOAL
+
+COMO TESTAR
+1. Abra index.html no navegador para testar as funções principais.
+2. Para instalar como aplicativo e usar o service worker, publique a pasta em um serviço de hospedagem estática com HTTPS.
+3. No GitHub Pages, use a branch main e a pasta raiz (/).
+
+DIREÇÃO VISUAL
+- Dark mode profundo inspirado em fotografia editorial de natureza nórdica.
+- Hero fotográfico com tipografia monumental e espaçada.
+- Navegação translúcida com efeito de vidro fosco.
+- Blocos retangulares assimétricos, números editoriais e textura geométrica discreta.
+- Interações contidas, com acentos em verde-musgo e cinza mineral.
+
+FUNCIONALIDADES
+- Painel do dia com resumo e sugestão de próximo passo.
+- Cadastro, conclusão, filtro e exclusão de tarefas.
+- Cadastro e acompanhamento diário de hábitos.
+- Projetos com próxima ação e progresso.
+- Caixa de ideias e conversão de ideia em tarefa.
+- Revisão semanal.
+- Backup e restauração em JSON.
+- Layout adaptável para celular e computador.
+- Estrutura PWA com cache offline após publicação.
+
+ARMAZENAMENTO
+Os dados ficam no armazenamento local do navegador deste dispositivo. Não existe sincronização automática entre dispositivos. Use Backup para guardar uma cópia regularmente.
+
+FOTOGRAFIAS
+As fotografias do hero e do painel atmosférico são carregadas do Unsplash e precisam de internet para aparecer.
