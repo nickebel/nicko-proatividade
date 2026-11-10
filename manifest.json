@@ -1,11 +1,11 @@
 {
   "name": "Nicko — Um espaço de calma",
   "short_name": "Nicko",
-  "description": "Um espaço escuro e imersivo para organizar o cotidiano e cultivar pequenas mudanças.",
+  "description": "Um dashboard pessoal em tons terrosos para organizar rotinas, cultivar hábitos e encontrar inspiração.",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#e8e1cf",
-  "theme_color": "#e8e1cf",
+  "background_color": "#1a1512",
+  "theme_color": "#1a1512",
   "icons": [
     {
       "src": "icon.svg",
