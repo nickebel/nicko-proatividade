@@ -100,6 +100,17 @@ main{min-width:0}.view{display:none;animation:page-arrive .35s var(--ease) both}
 .audio-load-button{cursor:pointer}
 .audio-load-button:disabled{opacity:.5;cursor:wait}
 @media(max-width:520px){.audio-url-form{flex-direction:column}.audio-load-button{align-self:flex-start}}
+
+/* Player oficial incorporado do YouTube / YouTube Music */
+.youtube-embed-wrap{display:block;width:100%;min-width:200px;min-height:200px;margin:0 0 13px;overflow:hidden;border:1px solid rgba(178,138,109,.3);border-radius:4px;background:#14110f;box-shadow:0 8px 22px rgba(0,0,0,.2)}
+.youtube-embed-wrap[hidden]{display:none!important}
+.youtube-player-container{display:block;width:100%;height:240px;min-width:200px;min-height:200px;background:#14110f}
+.youtube-player-container iframe{display:block;width:100%;height:240px;min-width:200px;min-height:200px;border:0}
+.youtube-status{min-height:17px;margin:7px 0 0;color:var(--muted-dim);font-family:var(--mono);font-size:7px;line-height:1.5}
+.youtube-external{display:inline-block;margin-top:5px;color:var(--accent);font-family:var(--mono);font-size:7px;text-decoration:underline;text-underline-offset:3px}
+.youtube-external[hidden]{display:none}
+.youtube-status.is-error{color:#c58e77}
+@media(max-width:520px){.youtube-player-container,.youtube-player-container iframe{height:220px}}
 </style>
 </head>
 <body>
@@ -141,55 +152,30 @@ main{min-width:0}.view{display:none;animation:page-arrive .35s var(--ease) both}
     <section class="dashboard-column center-column" aria-label="Música e acompanhamento">
       <div class="column-heading"><span>02 / listening room</span><small>soundtrack for today</small></div>
       
-<article class="mixtape-card metrolist-card">
-  <div class="mixtape-top">
-    <span class="mixtape-label">NICKO RADIO / METROLIST</span>
-    <span class="mixtape-number">SIDE A · 2026</span>
-  </div>
 
+<article class="mixtape-card metrolist-card">
+  <div class="mixtape-top"><span class="mixtape-label">NICKO RADIO / METROLIST</span><span class="mixtape-number">SIDE A · 2026</span></div>
   <div class="mixtape-art">
     <div class="vinyl-record" id="vinylRecord" aria-hidden="true"></div>
-    <div class="mixtape-copy">
-      <h3>side a<br>slow moments</h3>
-      <p>Uma trilha sonora para acompanhar seus estudos, pausas e pequenos começos.</p>
-    </div>
+    <div class="mixtape-copy"><h3>side a<br>slow moments</h3><p>Sua trilha sonora do YouTube Music, dentro do cantinho de escuta do Nicko.</p></div>
   </div>
-
   <div class="mixtape-rule"></div>
-
   <div class="audio-track-info">
     <div class="audio-track-copy">
-      <span class="audio-status" id="audioStatus" aria-live="polite">METROLIST PLAYER / PRONTO PARA TOCAR</span>
-      <strong id="trackTitle">Nenhuma faixa carregada</strong>
-      <small id="trackMeta">Adicione arquivos MP3 ou um link direto de áudio</small>
+      <span class="audio-status" id="audioStatus" aria-live="polite">YOUTUBE PLAYER / AGUARDANDO LINK</span>
+      <strong id="trackTitle">Sua próxima faixa começa aqui</strong>
+      <small id="trackMeta">Cole um link de música do YouTube ou YouTube Music</small>
     </div>
-    <span class="audio-track-index" id="trackIndex">— / —</span>
   </div>
-
-  <audio id="audioElement" preload="metadata"></audio>
-
-  <div class="audio-timeline">
-    <input id="audioProgress" class="audio-progress" type="range" min="0" max="100" step="0.1" value="0" disabled aria-label="Progresso da música">
-    <div class="audio-times"><span id="audioCurrentTime">0:00</span><span id="audioDuration">0:00</span></div>
-  </div>
-
-  <div class="audio-controls" aria-label="Controles de reprodução">
-    <button class="audio-control" id="previousTrack" type="button" aria-label="Faixa anterior" title="Anterior" disabled>↶</button>
-    <button class="audio-control audio-play" id="togglePlayback" type="button" aria-label="Reproduzir" title="Reproduzir" disabled>▶</button>
-    <button class="audio-control" id="nextTrack" type="button" aria-label="Próxima faixa" title="Próxima" disabled>↷</button>
-  </div>
-
+  <div class="youtube-embed-wrap" id="youtubeEmbedWrap" hidden><div id="youtube-player-container" class="youtube-player-container"></div></div>
   <div class="audio-source-area">
-    <div class="audio-url-form" id="audioUrlControls">
-      <input class="audio-url-field" id="audioUrl" type="url" inputmode="url" placeholder="Cole um link direto para .mp3 ou áudio" aria-label="Link direto de áudio">
-      <button class="audio-load-button" id="loadAudioUrl" type="button">carregar link ↗</button>
+    <div class="audio-url-form" id="youtubeUrlControls">
+      <input class="audio-url-field" id="youtubeUrl" type="url" inputmode="url" placeholder="Cole o link do YouTube / YouTube Music" aria-label="Link do YouTube ou YouTube Music">
+      <button class="audio-load-button" id="loadYoutubeUrl" type="button">carregar faixa ↗</button>
     </div>
-    <div class="audio-file-row">
-      <input id="audioFileInput" type="file" accept="audio/*,.mp3,.m4a,.ogg,.wav,.flac" multiple hidden>
-      <button class="audio-file-button" id="chooseAudioFiles" type="button">＋ adicionar arquivos</button>
-      <span>MP3 · M4A · OGG · WAV · FLAC</span>
-    </div>
-    <p class="audio-hint">Arquivos locais ficam disponíveis nesta sessão do navegador. O link direto fica salvo neste dispositivo.</p>
+    <p class="youtube-status" id="youtubeStatus" aria-live="polite">LINKS ACEITOS · YOUTUBE.COM · MUSIC.YOUTUBE.COM · YOUTU.BE</p>
+    <a class="youtube-external" id="youtubeExternal" href="#" target="_blank" rel="noopener noreferrer" hidden>Abrir no YouTube ↗</a>
+    <p class="audio-hint">O player oficial permanece visível enquanto toca. Ao sair do dashboard, a reprodução é pausada.</p>
   </div>
 </article>
 
@@ -260,7 +246,7 @@ main{min-width:0}.view{display:none;animation:page-arrive .35s var(--ease) both}
 <script>
 (() => {
   const KEY='nicko-proatividade-v1';
-  const AUDIO_URL_KEY='nicko-audio-url-v1';
+
   const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;};
   const dateBR=(d)=>{if(!d)return 'Sem prazo';const [y,m,day]=d.split('-');return `${day}/${m}/${y}`};
   const uid=()=>Math.random().toString(36).slice(2,10);
@@ -274,160 +260,116 @@ main{min-width:0}.view{display:none;animation:page-arrive .35s var(--ease) both}
   function taskDate(t){return t.date||today()}
   function taskIsOverdue(t){return !t.done&&taskDate(t)<today()}
   function streak(h){let n=0,d=new Date();while(true){const key=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;if(h.checks.includes(key)){n++;d.setDate(d.getDate()-1)}else break}return n}
-  function setView(name){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+name));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===name));if(name==='review')renderReviews();window.scrollTo({top:0,behavior:'smooth'})}
+  function setView(name){if(name!=='today')stopYoutubeForNavigation();document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+name));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===name));if(name==='review')renderReviews();if(name==='today')restoreYoutubeOnDashboard();window.scrollTo({top:0,behavior:'smooth'})}
   document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
   document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.go)));
   document.getElementById('todayDate').textContent=new Intl.DateTimeFormat('pt-BR',{weekday:'long',day:'numeric',month:'long'}).format(new Date());document.getElementById('yearLabel').textContent=String(new Date().getFullYear());
   const hr=new Date().getHours();document.getElementById('greeting').textContent=hr<12?'Bom Dia':hr<18?'Boa Tarde':'Boa Noite';
 
-  const audioElement=document.getElementById('audioElement');
-  const audioProgress=document.getElementById('audioProgress');
-  const audioCurrentTime=document.getElementById('audioCurrentTime');
-  const audioDuration=document.getElementById('audioDuration');
+
+  const youtubeInput=document.getElementById('youtubeUrl');
+  const youtubeButton=document.getElementById('loadYoutubeUrl');
+  const youtubeWrap=document.getElementById('youtubeEmbedWrap');
+  const youtubeContainer=document.getElementById('youtube-player-container');
+  const audioStatus=document.getElementById('audioStatus');
+  const youtubeStatus=document.getElementById('youtubeStatus');
   const trackTitle=document.getElementById('trackTitle');
   const trackMeta=document.getElementById('trackMeta');
-  const audioStatus=document.getElementById('audioStatus');
-  const trackIndexLabel=document.getElementById('trackIndex');
-  const playButton=document.getElementById('togglePlayback');
-  const previousButton=document.getElementById('previousTrack');
-  const nextButton=document.getElementById('nextTrack');
   const vinylRecord=document.getElementById('vinylRecord');
-  let audioQueue=[];
-  let audioIndex=0;
-  function formatAudioTime(value){
-    if(!Number.isFinite(value)||value<0)return '0:00';
-    const total=Math.floor(value);
-    return Math.floor(total/60)+':'+String(total%60).padStart(2,'0');
+  const youtubeExternal=document.getElementById('youtubeExternal');
+  let currentYoutubeVideoId='';
+  let youtubeIframe=null;
+
+  function extractYoutubeVideoId(raw){
+    try{
+      const value=String(raw||'').trim();
+      if(!value)return null;
+      const url=new URL(value.includes('://')?value:'https://'+value);
+      const host=url.hostname.toLowerCase().replace(/^www\\./,'');
+      let videoId='';
+      if(host==='youtu.be'){
+        videoId=url.pathname.split('/').filter(Boolean)[0]||'';
+      }else if(['youtube.com','music.youtube.com','m.youtube.com','youtube-nocookie.com'].includes(host)){
+        const path=url.pathname.split('/').filter(Boolean);
+        if(url.pathname==='/watch'||url.pathname==='/watch/'){
+          videoId=url.searchParams.get('v')||'';
+        }else if(['embed','shorts','live','v'].includes(path[0])){
+          videoId=path[1]||'';
+        }
+      }
+      return /^[A-Za-z0-9_-]{11}$/.test(videoId)?videoId:null;
+    }catch{return null}
   }
-  function updateAudioButtons(){
-    const hasTrack=audioQueue.length>0;
-    playButton.disabled=!hasTrack;
-    previousButton.disabled=!hasTrack;
-    nextButton.disabled=!hasTrack;
-    audioProgress.disabled=!hasTrack||!Number.isFinite(audioElement.duration)||audioElement.duration<=0;
-    trackIndexLabel.textContent=hasTrack?String(audioIndex+1).padStart(2,'0')+' / '+String(audioQueue.length).padStart(2,'0'):'— / —';
+
+  function showYoutubeVideo(videoId,autoplay){
+    currentYoutubeVideoId=videoId;
+    youtubeWrap.hidden=false;
+    youtubeContainer.replaceChildren();
+    const iframe=document.createElement('iframe');
+    const params=new URLSearchParams({autoplay:autoplay?'1':'0',playsinline:'1',rel:'0'});
+    iframe.src='https://www.youtube.com/embed/'+encodeURIComponent(videoId)+'?'+params.toString();
+    iframe.title='Player oficial do YouTube — Nicko Radio';
+    iframe.width='100%';iframe.height='240';iframe.loading='eager';
+    iframe.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.referrerPolicy='strict-origin-when-cross-origin';iframe.allowFullscreen=true;
+    iframe.addEventListener('load',()=>{
+      youtubeStatus.textContent=autoplay?'PLAYER CARREGADO · SE O AUTOPLAY FOR BLOQUEADO, TOQUE EM PLAY NO VÍDEO':'PLAYER PRONTO · TOQUE EM PLAY PARA CONTINUAR';
+      youtubeStatus.classList.remove('is-error');
+    },{once:true});
+    youtubeContainer.appendChild(iframe);
+    youtubeIframe=iframe;
+    youtubeExternal.href='https://www.youtube.com/watch?v='+encodeURIComponent(videoId);
+    youtubeExternal.hidden=false;
+    trackTitle.textContent='Faixa do YouTube carregada';
+    trackMeta.textContent='Vídeo '+videoId+' · controles oficiais do YouTube';
+    audioStatus.textContent=autoplay?'YOUTUBE PLAYER / CARREGANDO':'YOUTUBE PLAYER / PAUSADO';
+    vinylRecord.classList.toggle('is-playing',!!autoplay);
   }
-  function updateAudioProgress(){
-    const duration=audioElement.duration;
-    audioCurrentTime.textContent=formatAudioTime(audioElement.currentTime);
-    audioDuration.textContent=formatAudioTime(duration);
-    if(Number.isFinite(duration)&&duration>0){
-      audioProgress.value=String((audioElement.currentTime/duration)*100);
-      audioProgress.disabled=false;
-    }else{audioProgress.value='0';audioProgress.disabled=true;}
-  }
-  function selectAudioTrack(index,autoPlay=false){
-    if(!audioQueue.length)return;
-    audioIndex=(index+audioQueue.length)%audioQueue.length;
-    const track=audioQueue[audioIndex];
-    audioElement.pause();
-    audioElement.src=track.src;
-    audioElement.load();
-    trackTitle.textContent=track.title;
-    trackMeta.textContent=track.meta||('FAIXA '+String(audioIndex+1).padStart(2,'0'));
-    audioStatus.textContent='METROLIST PLAYER / CARREGANDO FAIXA';
-    audioCurrentTime.textContent='0:00';
-    audioDuration.textContent='0:00';
-    audioProgress.value='0';
-    audioProgress.disabled=true;
-    vinylRecord.classList.remove('is-playing');
-    playButton.textContent='▶';
-    playButton.setAttribute('aria-label','Reproduzir');
-    updateAudioButtons();
-    if(autoPlay){
-      audioElement.play().catch(()=>{audioStatus.textContent='NÃO FOI POSSÍVEL REPRODUZIR ESTA FAIXA';});
+
+  function stopYoutubeForNavigation(){
+    if(!currentYoutubeVideoId)return;
+    if(youtubeIframe){
+      youtubeIframe.src='about:blank';
+      youtubeContainer.replaceChildren();
+      youtubeIframe=null;
     }
-  }
-  function releaseAudioQueue(){
-    audioElement.pause();
-    audioQueue.forEach(track=>{if(track.objectUrl)URL.revokeObjectURL(track.src);});
-    audioQueue=[];audioIndex=0;
-    audioElement.removeAttribute('src');audioElement.load();
+    youtubeWrap.hidden=true;
     vinylRecord.classList.remove('is-playing');
-    playButton.textContent='▶';playButton.setAttribute('aria-label','Reproduzir');
-    audioProgress.value='0';audioProgress.disabled=true;
-    audioCurrentTime.textContent='0:00';audioDuration.textContent='0:00';
-    trackTitle.textContent='Nenhuma faixa carregada';
-    trackMeta.textContent='Adicione arquivos MP3 ou um link direto de áudio';
-    audioStatus.textContent='METROLIST PLAYER / PRONTO PARA TOCAR';
-    updateAudioButtons();
+    audioStatus.textContent='PAUSADO AO SAIR DO DASHBOARD';
+    youtubeStatus.textContent='A FAIXA FOI PAUSADA AO ABRIR OUTRA SEÇÃO';
   }
-  function loadAudioQueue(tracks,sourceLabel){
-    releaseAudioQueue();
-    if(!tracks.length)return;
-    audioQueue=tracks;
-    selectAudioTrack(0,false);
-    audioStatus.textContent=sourceLabel;
-    updateAudioButtons();
+
+  function restoreYoutubeOnDashboard(){
+    if(!currentYoutubeVideoId||youtubeIframe)return;
+    showYoutubeVideo(currentYoutubeVideoId,false);
   }
-  document.getElementById('audioFileInput').addEventListener('change',event=>{
-    const files=Array.from(event.target.files||[]).filter(file=>file.type.startsWith('audio/')||/\.(mp3|m4a|ogg|wav|flac)$/i.test(file.name));
-    if(!files.length){audioStatus.textContent='NENHUM ARQUIVO DE ÁUDIO VÁLIDO';return;}
-    try{localStorage.removeItem(AUDIO_URL_KEY);}catch{}
-    const tracks=files.map((file,index)=>({src:URL.createObjectURL(file),title:file.name.replace(/\.[^.]+$/,''),meta:'ARQUIVO LOCAL · '+String(index+1).padStart(2,'0')+' DE '+String(files.length).padStart(2,'0'),objectUrl:true}));
-    loadAudioQueue(tracks,'ARQUIVOS LOCAIS / '+files.length+' FAIXA(S) NA FILA');
-    toast(files.length===1?'Arquivo carregado. Aperte play para ouvir.':files.length+' faixas adicionadas à fila.');
-    event.target.value='';
-  });
-  document.getElementById('chooseAudioFiles').addEventListener('click',()=>document.getElementById('audioFileInput').click());
-  const audioUrlInput=document.getElementById('audioUrl');
-  const loadAudioUrlButton=document.getElementById('loadAudioUrl');
-  function loadAudioFromInput(event){
+
+  function loadYoutubeFromInput(event){
     if(event)event.preventDefault();
-    const raw=audioUrlInput.value.trim();
-    if(!raw){audioStatus.textContent='COLE UM LINK DIRETO DE ÁUDIO PARA CONTINUAR';audioUrlInput.focus();return false;}
-    let url;
-    try{url=new URL(raw);}catch{audioStatus.textContent='LINK INVÁLIDO · COLE O ENDEREÇO DIRETO DO ÁUDIO';audioUrlInput.focus();return false;}
-    if(!['http:','https:'].includes(url.protocol)){audioStatus.textContent='USE UM LINK HTTP OU HTTPS DE ÁUDIO';audioUrlInput.focus();return false;}
-    let title='Faixa online';
-    try{title=decodeURIComponent(url.pathname.split('/').pop()||'Faixa online');}catch{}
-    try{localStorage.setItem(AUDIO_URL_KEY,url.href);}catch{}
-    loadAudioQueue([{src:url.href,title,meta:'LINK DIRETO · ÁUDIO ONLINE',objectUrl:false}],'LINK DIRETO / CARREGANDO');
-    audioElement.play().catch(()=>{
-      audioStatus.textContent='FAIXA CARREGADA · APERTE PLAY PARA REPRODUZIR';
-    });
+    const raw=youtubeInput.value.trim();
+    const videoId=extractYoutubeVideoId(raw);
+    if(!videoId){
+      audioStatus.textContent='LINK DO YOUTUBE NÃO RECONHECIDO';
+      youtubeStatus.textContent='COLE UM LINK DE VÍDEO: YOUTUBE.COM/WATCH, MUSIC.YOUTUBE.COM OU YOUTU.BE';
+      youtubeStatus.classList.add('is-error');
+      youtubeInput.focus();
+      return false;
+    }
+    showYoutubeVideo(videoId,true);
+    youtubeStatus.textContent='SOLICITANDO REPRODUÇÃO · USE OS CONTROLES DO PLAYER SE NECESSÁRIO';
     return true;
   }
-  loadAudioUrlButton.addEventListener('click',function(event){
+
+  youtubeButton.addEventListener('click',function(event){
     event.preventDefault();
-    loadAudioFromInput(event);
+    loadYoutubeFromInput(event);
   });
-  audioUrlInput.addEventListener('keydown',function(event){
+  youtubeInput.addEventListener('keydown',function(event){
     if(event.key==='Enter'){
       event.preventDefault();
-      loadAudioFromInput(event);
+      loadYoutubeFromInput(event);
     }
   });
-  playButton.addEventListener('click',()=>{
-    if(!audioQueue.length){audioStatus.textContent='CARREGUE UMA FAIXA PARA COMEÇAR';return;}
-    if(audioElement.paused){audioElement.play().catch(()=>{audioStatus.textContent='ERRO AO REPRODUZIR · VERIFIQUE O ARQUIVO OU LINK';});}
-    else audioElement.pause();
-  });
-  previousButton.addEventListener('click',()=>{
-    if(!audioQueue.length)return;
-    if(audioElement.currentTime>3){audioElement.currentTime=0;return;}
-    selectAudioTrack(audioIndex-1,true);
-  });
-  nextButton.addEventListener('click',()=>{if(audioQueue.length)selectAudioTrack(audioIndex+1,true);});
-  audioProgress.addEventListener('input',()=>{
-    if(Number.isFinite(audioElement.duration)&&audioElement.duration>0){audioElement.currentTime=(Number(audioProgress.value)/100)*audioElement.duration;}
-  });
-  audioElement.addEventListener('loadedmetadata',()=>{
-    updateAudioProgress();
-    audioStatus.textContent='METROLIST PLAYER / TOCANDO SUA COLEÇÃO';
-    updateAudioButtons();
-  });
-  audioElement.addEventListener('timeupdate',updateAudioProgress);
-  audioElement.addEventListener('durationchange',updateAudioProgress);
-  audioElement.addEventListener('play',()=>{playButton.textContent='Ⅱ';playButton.setAttribute('aria-label','Pausar');vinylRecord.classList.add('is-playing');audioStatus.textContent='NOW PLAYING / NICKO RADIO';});
-  audioElement.addEventListener('pause',()=>{playButton.textContent='▶';playButton.setAttribute('aria-label','Reproduzir');vinylRecord.classList.remove('is-playing');});
-  audioElement.addEventListener('ended',()=>{if(audioQueue.length>1)selectAudioTrack(audioIndex+1,true);else{playButton.textContent='▶';audioStatus.textContent='FAIXA CONCLUÍDA';}});
-  audioElement.addEventListener('error',()=>{if(audioQueue.length)audioStatus.textContent='NÃO FOI POSSÍVEL ABRIR O ÁUDIO · TENTE UM MP3 OU LINK DIRETO';});
-  let savedAudioUrl='';
-  try{savedAudioUrl=localStorage.getItem(AUDIO_URL_KEY)||'';}catch{}
-  if(savedAudioUrl){audioUrlInput.value=savedAudioUrl;loadAudioQueue([{src:savedAudioUrl,title:'Faixa online salva',meta:'LINK DIRETO · SALVO NESTE DISPOSITIVO',objectUrl:false}],'LINK SALVO / PRONTO PARA TOCAR');}
-
-  
 
   function taskHTML(t){return `<div class="task-row ${t.done?'completed':''}"><button class="check ${t.done?'done':''}" data-task-toggle="${t.id}" aria-label="${t.done?'Reabrir':'Concluir'} tarefa">${t.done?'✓':''}</button><div class="task-main"><b>${escapeHTML(t.title)}</b><small>${escapeHTML(t.category||'Pessoal')} · ${taskIsOverdue(t)?'Atrasada':dateBR(taskDate(t))}</small></div><span class="priority ${(t.priority||'media').toLowerCase()}">${t.priority||'Média'}</span><button class="text-btn" data-task-delete="${t.id}" aria-label="Excluir tarefa">×</button></div>`}
   function habitToggleHTML(h,mini=false){const done=isDone(h);return mini?`<div class="mini-habit"><div><b>${escapeHTML(h.emoji)} ${escapeHTML(h.name)}</b><small>${streak(h)} dia(s) de sequência</small></div><button class="habit-toggle ${done?'done':''}" data-habit-toggle="${h.id}">${done?'Feito ✓':'Marcar'}</button></div>`:`<article class="habit-card"><div class="habit-card-top"><div class="habit-emoji">${escapeHTML(h.emoji)}</div><span class="priority baixa">${escapeHTML(h.frequency||'Diário')}</span></div><h3>${escapeHTML(h.name)}</h3><p>Um passo possível, no seu ritmo.</p><div class="habit-card-foot"><small>🔥 ${streak(h)} dia(s) de sequência</small><button class="${done?'done':''}" data-habit-toggle="${h.id}">${done?'Praticado hoje ✓':'Marcar como feito'}</button></div><div style="display:flex;justify-content:flex-end;margin-top:8px"><button class="text-btn" style="font-size:10px" data-habit-delete="${h.id}">Remover hábito</button></div></article>`}
